@@ -6,7 +6,6 @@ const cors= require('cors');
 const mongoose= require('mongoose');
 const user = require("./routes/user");
 const admin = require("./routes/admin");
-
 //envioronment variables
 env.config();
 mongoose.connect(process.env.mongoUri, {useNewUrlParser: true, useUnifiedTopology: true }).then(()=>{
