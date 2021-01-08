@@ -14,7 +14,6 @@ exports.requireLogin = async (req, res, next) => {
       next();
       }   
 }
-
 exports.adminMiddleware = (req, res, next) => {
   if(req.user.role !== "admin") {
     return res.status(400).json({ error: "Access denied" });     
