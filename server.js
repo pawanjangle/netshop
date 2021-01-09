@@ -3,11 +3,14 @@ const express= require('express');
 const app= express();
 const bodyparser= require('body-parser');
 const cors= require('cors');
+const path = require("path");
 const mongoose= require('mongoose');
 const user = require("./routes/user");
 const admin = require("./routes/admin");
 const category = require("./routes/category");
-const path = require("path");
+const cart = require("./routes/cart");
+const product = require("./routes/product");
+
 //envioronment variables
 env.config();
 mongoose.connect(process.env.mongoUri, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }).then(()=>{
@@ -16,6 +19,8 @@ console.log("mongodb connection successful")
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(cors());
+app.use("/product", product)
+app.use("/cart", cart)
 app.use("/category", category)
 app.use("/user", user );
 app.use("/admin", admin )
