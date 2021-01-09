@@ -10,7 +10,6 @@ const admin = require("./routes/admin");
 const category = require("./routes/category");
 const cart = require("./routes/cart");
 const product = require("./routes/product");
-
 //envioronment variables
 env.config();
 mongoose.connect(process.env.mongoUri, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }).then(()=>{

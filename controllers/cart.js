@@ -15,8 +15,7 @@ exports.addItemToCart = (req, res) => {
                        ...req.body.cartItems,
                        quantity: item.quantity + req.body.cartItems.quantity
                     }
-                }}
-               
+                }}              
             }
             else{
                 condition = {user: req.user._id};
