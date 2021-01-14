@@ -1,25 +1,27 @@
 const Product = require("../models/product");
 const slugify = require("slugify")
 exports.createProduct = (req, res) => {
-    let productPictures = [];
-    const { name, price, description, category, quantity } = req.body;
-    if(req.files.length>0){
-       productPictures = req.files.map(file =>{
-            return {img: file.filename}
-        })
-    }
+  if(req.file){
+    console.log(req.file.filename);
+    const { name, price, description, quantity } = req.body;
     const newProduct = new Product({
         name,
         slug: slugify(name),
         price,
         description,
-        productPictures,
-        category,
-        createdBy: req.user._id,
+        productPicture: process.env.API + "/public/" + req.file.filename,
+        // createdBy: req.user._id,
         quantity
     });
-   const product = newProduct.save((error, product)=>{
+    newProduct.save((error, product)=>{
        if(error) return res.status(400).json({error});
-       if(product) return res.status(200).json({product})
+       if(product) return res.status(200).json({product, message: "Product created successfully"})
    });
+  } 
+    }
+    exports.getProducts = async (req, res)=>{
+     const products = await Product.find();
+     if(products){
+       return res.status(200).json({ products })
+     }
     }

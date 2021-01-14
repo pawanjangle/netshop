@@ -1,160 +1,89 @@
-import React from "react";
-import logo from "../logo.svg";
-import PropTypes from "prop-types";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import CategoryOutlinedIcon from '@material-ui/icons/CategoryOutlined';
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  appBar: {
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-      backgroundColor: "black",
-    },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-}));
-
-function ResponsiveDrawer(props) {
-  const { window } = props;
-  const classes = useStyles();
-  const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+const NavbarComponent = () => {
+  const dispatch = useDispatch()
+  const history = useHistory();
+const token = useSelector(state=> state.auth.token);
+  const signout = () => {
+    localStorage.clear();  
+    dispatch({type: "SIGNOUT_USER", payload: "logout successfully"}) 
+  }
+  const renderList = () => {
+    if (!token) {
+      return(
+      [
+        <>
+          <li className="nav-item active">
+            <a>
+              <Link className="nav-link" to="/signin">
+                Signin
+              </Link>
+              <span className="sr-only">(current)</span>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a>
+              <Link className="nav-link" to="/signup">
+                Signup
+              </Link>
+            </a>
+          </li>
+        </>
+      ])
+    } else {
+      return  [
+        <>
+         
+          <li className="nav-item">
+            <a>
+              <Link className="nav-link" to="/profile">
+                My Account
+              </Link>
+            </a>
+          </li>
+          <li className="nav-item active">
+            <a>
+              <Link className="nav-link" to="/cart">
+              <ShoppingCartOutlinedIcon/>
+              </Link>
+              <span className="sr-only">(current)</span>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a>
+              <Link className="nav-link" to = "/signin" onClick={() => signout()}>
+                Logout
+              </Link>
+            </a>
+          </li>
+        </>,
+      ];
+    }
   };
-
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-     
-      <List>
-      <Divider />
-          <ListItem>
-            <ListItemIcon>
-              <CategoryOutlinedIcon/>
-            </ListItemIcon>
-            <ListItemText primary="All Categories" />
-          </ListItem>
-          <Divider />         
-      </List>
-      
-    </div>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <img
-            src={logo}
-            alt=""
-            style={{ height: "40px", marginRight: "20px" }}
-          />
-          <Typography variant="h6" noWrap>
-            NETSHOP
-          </Typography>
-          <ShoppingCartOutlinedIcon className="ml-auto" />
-        </Toolbar>
-      </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
-          <Drawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === "rtl" ? "right" : "left"}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
+    <div>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+        <a className="navbar-brand">NETSHOP</a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ml-auto">{renderList()}</ul>
+        </div>
       </nav>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-       
-      </main>
     </div>
   );
-}
-
-ResponsiveDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+export default NavbarComponent;

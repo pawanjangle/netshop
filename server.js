@@ -8,7 +8,6 @@ const mongoose= require('mongoose');
 const user = require("./routes/user");
 const admin = require("./routes/admin");
 const category = require("./routes/category");
-const cart = require("./routes/cart");
 const product = require("./routes/product");
 //envioronment variables
 env.config();
@@ -19,7 +18,6 @@ app.use(express.json());
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(cors());
 app.use("/product", product)
-app.use("/cart", cart)
 app.use("/category", category)
 app.use("/user", user );
 app.use("/admin", admin )
