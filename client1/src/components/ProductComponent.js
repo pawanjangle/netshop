@@ -43,7 +43,9 @@ const ProductComponent = () => {
                         <div className="card-body">
                           <center>
                             <h6>{product.name}</h6>
-                            <button className="btn btn-primary">
+                            <button className="btn btn-primary" onClick={()=>{
+                              addProductData(product)
+                            }}>
                               Add To Cart
                             </button>
                           </center>

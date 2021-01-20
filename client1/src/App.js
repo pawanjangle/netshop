@@ -36,7 +36,7 @@ const Routing = () => {
         .then((res) => {
           console.log(res)
           if (res.data.role === "user") {
-            history.push("/home")
+            history.push("/")
             dispatch({
               type: "SIGNIN_USER",
               payload: { user: res.data, token,

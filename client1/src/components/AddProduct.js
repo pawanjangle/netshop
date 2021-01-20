@@ -27,7 +27,6 @@ const AddProduct = () => {
       form.append("productPicture", productPicture);
       console.log(form)
       axios.post("/product/create", form).then((res) => {
-        
         if(res.data.message){
           dispatch({ type: "ADD_PRODUCT", payload: res.data.message})
         }
