@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import NavbarComponent from "./components/NavbarComponent";
 import ProductComponent from "./components/ProductComponent";
+import Checkout from "./components/Checkout";
 const Routing = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -35,12 +36,20 @@ const Routing = () => {
         })
         .then((res) => {
           console.log(res)
-          if (res.data.role === "user") {
+          if (res.data.role === "user") {           
             history.push("/")
             dispatch({
               type: "SIGNIN_USER",
               payload: { user: res.data, token,
               cartItems: res.data.cartItems },
+            });
+            axios.get("/cart/getcartitems", {
+              headers: {
+                Authorization: "bearer " + localStorage.getItem("token"),
+              },
+            }).then((res) => {
+              console.log(res.data)
+              dispatch({ type: "GET_CARTITEMS", payload: res.data });
             });
           }
         if(res.data.role === "admin"){
@@ -69,6 +78,8 @@ const Routing = () => {
         <Route path="/admin/allcategories" component={AllCategories} />
         <Route path="/admin/allproducts" component={AllProducts} />
         <Route path="/admin/updateproduct" component={UpdateProduct} />
+        <Route path="/checkout" component={Checkout} />
+
       </Switch>
     </div>
   );

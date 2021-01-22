@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import NavbarComponent from "./NavbarComponent";
 const ProductComponent = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
   const products = useSelector((state) => state.product.products);
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
@@ -13,13 +13,17 @@ const ProductComponent = () => {
       dispatch({ type: "ALL_PRODUCTS", payload: res.data.products });
     });
   }, []);
-  const addProductData = (product) => {
+  const addProductData = (id) => {
     axios
-      .put("/user/addtocart", product, {
-        headers: {
-          Authorization: "bearer " + localStorage.getItem("token"),
-        },
-      })
+      .put(
+        "/cart/addtocart",
+        { id, quantity },
+        {
+          headers: {
+            Authorization: "bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data);
         dispatch({ type: "ADD_TO_CART", payload: res.data });
@@ -38,16 +42,33 @@ const ProductComponent = () => {
                         <img
                           className="card-img-top img-fluid"
                           src={product.productPicture}
-                          alt="Card image cap" style={{height: "250px"}}
+                          alt="Card image cap"
+                          style={{ height: "250px" }}
                         />
                         <div className="card-body">
                           <center>
                             <h6>{product.name}</h6>
-                            <button className="btn btn-primary" onClick={()=>{
-                              addProductData(product)
-                            }}>
-                              Add To Cart
-                            </button>
+                            <div className="d-flex justify-content-between">
+                              <div className="form-group">                             
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="quantity"
+                                  onChange={(e) => {
+                                    setQuantity(e.target.value);                                   
+                                  }}
+                                  style={{width: "100px"}}
+                                />
+                              </div>
+                              <button
+                                className="btn btn-primary"
+                                onClick={() => {
+                                  addProductData(product._id);
+                                }}
+                              >
+                                Add To Cart
+                              </button>
+                            </div>
                           </center>
                         </div>
                       </div>

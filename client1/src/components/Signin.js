@@ -17,11 +17,18 @@ const Signin = () => {
         localStorage.setItem("user", res.data.user);
         if(res.data.user.role ==="user"){
           history.push("/");
+          axios.get("/cart/getcartitems", {
+            headers: {
+              Authorization: "bearer " + localStorage.getItem("token"),
+            },
+          }).then((res) => {
+            console.log(res.data)
+            dispatch({ type: "GET_CARTITEMS", payload: res.data });
+          });
           dispatch({ type: "SIGNIN_USER", payload: {
             user: res.data.user,
             token: res.data.token,
             message: res.data.message,
-            cartItems: res.data.user.cartItems
           }});
         }
         else{

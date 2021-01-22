@@ -9,6 +9,7 @@ const user = require("./routes/user");
 const admin = require("./routes/admin");
 const category = require("./routes/category");
 const product = require("./routes/product");
+const cart = require("./routes/cart");
 //envioronment variables
 env.config();
 mongoose.connect(process.env.mongoUri, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }).then(()=>{
@@ -17,6 +18,7 @@ console.log("mongodb connection successful")
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(cors());
+app.use("/cart", cart)
 app.use("/product", product)
 app.use("/category", category)
 app.use("/user", user );

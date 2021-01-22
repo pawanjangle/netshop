@@ -4,8 +4,6 @@ const { requireLogin, userMiddleware } = require("../middlewares/requireLogin");
 const { signup, signin, addItemToCart, getCartItems, removeItemFromCart, getUserProfile } = require("../controllers/user");
 router.post("/signup", signup);
 router.post("/signin", signin);
-router.put("/addtocart", requireLogin, addItemToCart);
-router.put("/removefromcart", requireLogin, removeItemFromCart);
-router.get("/getcartitems", requireLogin, userMiddleware, getCartItems);
+
 router.get("/userprofile", requireLogin, getUserProfile);
 module.exports = router;

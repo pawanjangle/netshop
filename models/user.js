@@ -38,7 +38,6 @@ const userSchema = new mongoose.Schema(
     profilePicture: {
       type: String,
     },
-    cartItems : []
   },
   { timestamps: true }
 );

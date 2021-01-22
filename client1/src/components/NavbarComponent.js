@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import axios from "axios"
 const NavbarComponent = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const cartItems = useSelector((state) => state.auth.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
-  console.log(user)
   const signout = () => {
     localStorage.clear();
     dispatch({ type: "SIGNOUT_USER", payload: "logout successfully" });

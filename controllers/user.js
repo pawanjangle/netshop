@@ -40,29 +40,8 @@ exports.signin = async (req, res) => {
     return res.status(400).json({ error: "Invalid email or password" });
   }
 };
-exports.addItemToCart =  async (req, res) => {
-  const product = req.body;
-const cartItems = await User.findByIdAndUpdate(req.user._id, {$push: { cartItems: product}},
-  {new: true});
-if(cartItems){
-  return res.status(200).json({message: "Added to cart", cartItems: cartItems.cartItems})
-}
-}
-exports.removeItemFromCart =  async (req, res) => {
-  const product = req.body;
-const cartItems = await User.findByIdAndUpdate(req.user._id, {$pull: { cartItems: product}},
-  {new: true});
-if(cartItems){
-  return res.status(200).json({message: "Removed from cart", cartItems: cartItems.cartItems})
-}
-}
-exports.getCartItems =  async (req, res) => {
-const user = await User.findById(req.user._id)
-if(user){
-  const cartItems = user.cartItems;
-  return res.status(200).json(cartItems)
-}
-}
+
+
 exports.getUserProfile =  async (req, res) => {
 const user = await User.findById(req.user._id)
 if(user){

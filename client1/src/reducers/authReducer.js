@@ -5,7 +5,9 @@ const initialState = {
     signinError: "",
     token: "",
     user: "",
-    cartItems: ""
+    cartItems: "",
+    cartTotal: 0,
+    removeFromCartMessage: "",
 }
 const signupUser = (state = initialState, action)=>{
 switch (action.type) {
@@ -48,18 +50,7 @@ switch (action.type) {
                 token: null,
                 authenticated: false
             }
-            case "ADD_TO_CART":
-                return {
-                  ...state,
-                  addToCartMessage: action.payload,
-                  cartItems: action.payload.cartItems
-                };
-              case "GET_CARTITEMS":
-                return {
-                  ...state,
-                  cartItems: action.payload,
-                  addToCartMessage: null,
-                };
+          
             
     default: {
         return state 
