@@ -48,16 +48,16 @@ const ProductComponent = () => {
                         <div className="card-body">
                           <center>
                             <h6>{product.name}</h6>
-                            <div className="d-flex justify-content-between">
+                            <div className="d-flex justify-content-around">
                               <div className="form-group">                             
                                 <input
                                   type="text"
                                   className="form-control"
-                                  placeholder="quantity"
+                                  placeholder="qty."
                                   onChange={(e) => {
                                     setQuantity(e.target.value);                                   
                                   }}
-                                  style={{width: "100px"}}
+                                  style={{width: "50px"}}
                                 />
                               </div>
                               <button

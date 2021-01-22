@@ -9,12 +9,12 @@ exports.addItemToCart = async (req, res) => {
     if(productExist){
     const updatedCart = await Cart.findOneAndUpdate({_id: cartExist._id, "cartItems.product": id}, {
       $inc:{"cartItems.$.quantity": quantity}
-    }, {new: true});
+    }, {new: true}).populate("cartItems.product");
     return res.status(200).json({message: "added to cart", cartItems: updatedCart.cartItems})
     }
     else{
     const newProduct = {product: id, quantity}
-      const updatedCart = await Cart.findOneAndUpdate({_id: cartExist._id}, {$push:{cartItems: newProduct}}, {new: true})
+      const updatedCart = await Cart.findOneAndUpdate({_id: cartExist._id}, {$push:{cartItems: newProduct}}, {new: true}).populate("cartItems.product");
       return res.status(200).json({messsage: "added to cart", cartItems: updatedCart.cartItems } )
     }
   } else {
@@ -27,7 +27,7 @@ exports.addItemToCart = async (req, res) => {
         cart._id,
         { $push: { cartItems: { product: id, quantity } } },
         { new: true }
-      );
+      ).populate("cartItems.product");
       if (updated) {
         return res.status(200).json({ message: "Added to cart", cartItems: updated.cartItems });
       }
@@ -35,15 +35,17 @@ exports.addItemToCart = async (req, res) => {
   }
 };
 exports.removeItemFromCart = async (req, res) => {
-  //     const product = req.body;
-  //   const cartItems = await User.findByIdAndUpdate(req.user._id, {$pull: { cartItems: product}},
-  //     {new: true});
-  //   if(cartItems){
-  //     return res.status(200).json({message: "Removed from cart", cartItems: cartItems.cartItems})
-  //   }
+      const {id} = req.body;
+      console.log(id)
+    const cartItems = await Cart.findOneAndUpdate({user: req.user._id}, {$pull: { cartItems: {product: id }}},
+      {new: true}).populate("cartItems.product");
+    if(cartItems){
+      console.log(cartItems)
+      return res.status(200).json({message: "Removed from cart", cartItems: cartItems.cartItems})
+    }
 };
 exports.getCartItems = async (req, res) => {
-    const cart = await Cart.findOne({user: req.user._id})
+    const cart = await Cart.findOne({user: req.user._id}).populate("cartItems.product")
     if(cart){
       console.log(cart)
       // console.log(cart)

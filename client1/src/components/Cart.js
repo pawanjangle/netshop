@@ -3,26 +3,26 @@ import axios from "axios";
 import {Link} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 const Cart = () => {
-  const cartItems = useSelector((state) => state.auth.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotal = useSelector((state) => state.auth.cartTotal);
 
   console.log(cartItems);
   const dispatch = useDispatch();
-  useEffect(() => {
+  // useEffect(() => {
+  //   axios
+  //     .get("/cart/getcartitems", {
+  //       headers: {
+  //         Authorization: "bearer " + localStorage.getItem("token"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       dispatch({ type: "GET_CARTITEMS", payload: res.data });
+  //     });
+  // }, []);
+  const removeItemFromCart = (id) => {
     axios
-      .get("/cart/getcartitems", {
-        headers: {
-          Authorization: "bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        dispatch({ type: "GET_CARTITEMS", payload: res.data });
-      });
-  }, []);
-  const removeItemFromCart = (product) => {
-    axios
-      .put("/cart/removefromcart", product, {
+      .put("/cart/removefromcart",{id} , {
         headers: {
           Authorization: "bearer " + localStorage.getItem("token"),
         },
@@ -44,17 +44,18 @@ const Cart = () => {
                     <div className="d-flex">
                       <div className="col-lg-2">
                         <img
-                          src={cartItem.productPicture}
+                          src={cartItem.product.productPicture}
                           alt=""
                           className="img-fluid"
                         />
                       </div>
                       <div className="col-lg-7 d-flex flex-column">
-                        <h5>{cartItem.name}</h5>
-                        <h6>{cartItem.description}</h6>
-                        <button className="btn btn-danger" onClick={()=>removeItemFromCart(cartItem)}>Remove From Cart</button>
+                        <h5>{cartItem.product.name}</h5>
+                        <h6>{cartItem.product.description}</h6>
+                        <button className="btn btn-danger" onClick={()=>removeItemFromCart(cartItem.product._id)}>Remove From Cart</button>
                       </div>
-                      <div className="col-lg-1">INR {cartItem.price}</div>
+                      <div className="col-lg-2 d-flex"> 
+                     {cartItem.quantity} X INR {cartItem.product.price} </div>
                     </div>                 
                   </>
                 );
