@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 const Checkout = () => {
     const cartTotal = useSelector(state=> state.auth.cartTotal);
-    const cartItems = useSelector(state=> state.auth.cartItems);
+    const cartItems = useSelector(state=> state.cart.cartItems);
 const handleCheckout = (paymentInfo)=>{
   console.log(paymentInfo)
     }   
@@ -13,7 +13,7 @@ const handleCheckout = (paymentInfo)=>{
             <StripeCheckout
             name = "Netshop"
             token = {(paymentInfo)=>handleCheckout(paymentInfo)}
-            stripeKey = "pk_test_eybC0LNxchsp1GErzFpz1Xiw00fqxHBov8"
+            stripeKey = {process.env.stripeKey}
             amount= {cartTotal * 100}
             currency = "INR"
             image = {cartItems ? cartItems[0].productPicture : "Loading"}

@@ -52,7 +52,7 @@ const Cart = () => {
                       <div className="col-lg-7 d-flex flex-column">
                         <h5>{cartItem.product.name}</h5>
                         <h6>{cartItem.product.description}</h6>
-                        <button className="btn btn-danger" onClick={()=>removeItemFromCart(cartItem.product._id)}>Remove From Cart</button>
+                        <button className="btn btn-danger" onClick={()=>removeItemFromCart(cartItem.product._id)} style={{width: "20%"}}>Remove From Cart</button>
                       </div>
                       <div className="col-lg-2 d-flex"> 
                      {cartItem.quantity} X INR {cartItem.product.price} </div>
