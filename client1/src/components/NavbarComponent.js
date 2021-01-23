@@ -97,9 +97,9 @@ const NavbarComponent = () => {
     }
   };
   return (
-    <div>
+    <div className="mb-3">
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
-        <Link to="/">
+        <Link to= "/">
           <a className="navbar-brand">NETSHOP</a>
         </Link>
         <button

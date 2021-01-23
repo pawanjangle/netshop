@@ -27,7 +27,7 @@ const ProductComponent = () => {
       .then((res) => {
         console.log(res.data);
         dispatch({ type: "ADD_TO_CART", payload: res.data });
-      });
+      })      
   };
   return (
     <div>

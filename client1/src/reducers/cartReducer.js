@@ -1,6 +1,8 @@
 const initialState = {
   addToCartMessage: "",
   cartItems: "",
+  cartTotal: "",
+  paymentMessage: ""
   // removeFromCartMessage:""
 };
 const cartReducer = (state = initialState, action) => {
@@ -9,22 +11,30 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         addToCartMessage: action.payload.message,
-        cartItems: action.payload.cartItems
+        cartItems: action.payload.cartItems,
+        cartTotal: action.payload.cartTotal
       };
   case "REMOVE_FROM_CART":
       return {
         ...state,
         removeFromCartMessage: action.payload.message,
         cartItems: action.payload.cartItems,
-        addToCartMessage: null
+        addToCartMessage: null,
+        cartTotal: action.payload.cartTotal
       };
     case "GET_CARTITEMS":
       return {
         ...state,
         cartItems: action.payload.cartItems,
         addToCartMessage: null,
-        cartTotal: action.payload.price
+        cartTotal: action.payload.cartTotal
       };
+      case "CHECKOUT":
+        return{
+          ...state,
+          paymentMessage: action.payload.message,
+          cartItems: action.payload.cartItems
+        }
     default: {
       return state;
     }

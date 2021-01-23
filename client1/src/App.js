@@ -35,35 +35,34 @@ const Routing = () => {
           },
         })
         .then((res) => {
-          console.log(res)
-          if (res.data.role === "user") {           
-            history.push("/")
+          if (res.data.role === "user") {
+            history.push("/");
             dispatch({
               type: "SIGNIN_USER",
-              payload: { user: res.data, token,
-              cartItems: res.data.cartItems },
+              payload: { user: res.data, token },
             });
-            axios.get("/cart/getcartitems", {
-              headers: {
-                Authorization: "bearer " + localStorage.getItem("token"),
-              },
-            }).then((res) => {
-              console.log(res.data)
-              dispatch({ type: "GET_CARTITEMS", payload: res.data });
-            });
+            axios
+              .get("/cart/getcartitems", {
+                headers: {
+                  Authorization: "bearer " + localStorage.getItem("token"),
+                },
+              })
+              .then((res) => {            
+                dispatch({ type: "GET_CARTITEMS", payload: res.data });
+              });
           }
-        if(res.data.role === "admin"){
-          history.push("/admin")
+          if (res.data.role === "admin") {
+            history.push("/admin");
             dispatch({
               type: "SIGNIN_USER",
-              payload: { user: res.data, token}
-            })          
+              payload: { user: res.data, token },
+            });
           }
         });
     }
   }, []);
   return (
-    <div>     
+    <div>
       <Switch>
         <Route exact path="/" component={ProductComponent} />
         <Route path="/signin" component={Signin} />
@@ -79,17 +78,15 @@ const Routing = () => {
         <Route path="/admin/allproducts" component={AllProducts} />
         <Route path="/admin/updateproduct" component={UpdateProduct} />
         <Route path="/checkout" component={Checkout} />
-
       </Switch>
     </div>
   );
 };
 function App() {
-
   return (
     <Router>
       <div className="App">
-        <NavbarComponent/>
+        <NavbarComponent />
         <Routing />
       </div>
     </Router>
