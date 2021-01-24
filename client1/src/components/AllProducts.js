@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 const AllProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
+  console.log(products)
   const deleteProduct = (id)=>{
     axios.delete(`/product/deleteproduct/${id}`, {
       headers: {
@@ -11,15 +12,13 @@ const AllProducts = () => {
       },
     },
  ).then(res=>{
-    console.log(res)
     })
 }
   useEffect(() => {
     axios.get("/product/getproducts").then((res) => {
-      dispatch({ type: "GET_PRODUCTS", payload: res.data.products });
+      dispatch({ type: "ALL_PRODUCTS", payload: res.data.products });
     });
   }, []);
-
   const updateProduct = (id)=>{
     console.log(id)
     axios.delete("/updateproduct", id,  {

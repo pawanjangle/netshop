@@ -15,7 +15,7 @@ const Dashboard = () => {
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class=" dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -46,7 +46,7 @@ const Dashboard = () => {
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class=" dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"

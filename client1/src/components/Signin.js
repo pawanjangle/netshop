@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import M from "materialize-css"
 const Signin = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Signin = () => {
             token: res.data.token,
             message: res.data.message,
           }});
+          M.toast({html: res.data.message, classes:"#00796b teal darken-2", displayLength: 1000  })
         }
         else{
           dispatch({ type: "SIGNIN_USER", payload: {
@@ -37,17 +39,19 @@ const Signin = () => {
             token: res.data.token,
             message: res.data.message,           
           }});
+          M.toast({html: res.data.message, classes: "#00796b teal darken-2", displayLength: 1000  })
           history.push("/admin")
-        }
-            
+        }          
       }
       else{
-        dispatch({type: "SIGNIN_ERROR", payload: res})
+        M.toast({html: res.data.error, classes: "#f50057 pink accent-3", displayLength: 1000  })
+        dispatch({type: "SIGNIN_ERROR", payload: res.data})
       }
     });
   };
   return (
-    <div className="container">
+    <div className="d-flex flex-column Justify-content-center align-items-center">
+       <div className="card p-5" style={{ width: "50%"}}>
         <div className="form-group">
           <label>Email address</label>
           <input
@@ -66,6 +70,7 @@ const Signin = () => {
         <button type="submit" className="btn btn-primary" onClick={() => postData()}>
           Submit
         </button>
+        </div>
     </div>
   );
 };

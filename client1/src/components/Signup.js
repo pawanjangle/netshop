@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import M from "materialize-css"
 const Signup = () => {
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
@@ -10,17 +11,19 @@ const Signup = () => {
   const postData = () => {
     const data = { firstName, lastName, email, password };
     axios.post("/user/signup", data).then((res) => {
-      console.log(res);
-      if (res) {
-      //   dispatch({ type: "SIGNUP_USER", payload: res.data });
-      // }
-      // else{
-        dispatch({type: "SIGNUP_ERROR", payload: res})
+      if (res.data.message) {
+        dispatch({ type: "SIGNUP_USER", payload: res.data });
+        M.toast({html: res.data.message, classes:"#00796b teal darken-2", displayLength: 1000 })
+      }
+      else{
+        M.toast({html: res.data.error, classes: "#f50057 pink accent-3", displayLength: 1000  })
+        dispatch({type: "SIGNUP_ERROR", payload: res.data})
       }
     });
   };
   return (
-    <div className="container">
+    <div className="d-flex flex-column Justify-content-center align-items-center">
+    <div className="card p-5" style={{ width: "50%"}}>
       <div className="form-group">
         <label>First Name</label>
         <input
@@ -64,6 +67,7 @@ const Signup = () => {
       >
         Submit
       </button>
+    </div>
     </div>
   );
 };

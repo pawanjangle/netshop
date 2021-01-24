@@ -4,11 +4,11 @@ const User = require("../models/user");
 exports.signup = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   if (!firstName || !lastName || !email || !password) {
-    return res.status(422).json({ error: "Please add all credentials" });
+    return res.json({ error: "Please add all credentials" });
   }
     const emailExist = await User.findOne({ email: req.body.email });
     if (emailExist) {
-      return res.status(400).json({ error: "user already registered" });
+      return res.json({ error: "user already registered" });
     }
     const hash_password = await bcrypt.hash(password, 12);
     const _user = new User({
@@ -20,13 +20,16 @@ exports.signup = async (req, res) => {
     });
     const user = await _user.save();
     if (!user) {
-      return res.status(400).json({ error: "something went wrong" });
+      return res.json({ error: "something went wrong" });
     } else {
       return res.status(201).json({ message: "User created successfully", user});
     }
 };
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
+  if ( !email || !password) {
+    return res.json({ error: "Please add all credentials" });
+  }
   const user = await User.findOne({ email: req.body.email });
   if (user) {
     const passwordMatched = await bcrypt.compare(password, user.hash_password);
@@ -34,10 +37,10 @@ exports.signin = async (req, res) => {
       const token = jwt.sign({ _id: user._id }, process.env.jwtSecret);
       return res.status(200).json({ message: "login successful", token, user});
     } else {
-      return res.status(400).json({ error: "Invalid email or password" });
+      return res.json({ error: "Invalid email or password" });
     }
   } else {
-    return res.status(400).json({ error: "Invalid email or password" });
+    return res.json({ error: "Invalid email or password" });
   }
 };
 
@@ -46,5 +49,8 @@ exports.getUserProfile =  async (req, res) => {
 const user = await User.findById(req.user._id).select("-hash_password")
 if(user){
   return res.status(200).json(user)
+}
+else{
+  return res.json({error: "Invalid User"})
 }
 }

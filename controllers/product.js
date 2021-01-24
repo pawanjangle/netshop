@@ -1,8 +1,7 @@
 const Product = require("../models/product");
-const slugify = require("slugify")
-exports.createProduct = (req, res) => {
+const slugify = require("slugify");
+exports.createProduct = async (req, res) => {
   if(req.file){
-    console.log(req.file.filename);
     const { name, price, description, quantity, category } = req.body;
     const newProduct = new Product({
         name,
@@ -14,12 +13,14 @@ exports.createProduct = (req, res) => {
         // createdBy: req.user._id,
         quantity
     });
-    newProduct.save((error, product)=>{
-      console.log(error)
-       if(error) return res.status(400).json({error: "failed to add product"});
-       if(product) return res.status(200).json({product, message: "Product created successfully"})
-   });
-  } 
+   const product = await newProduct.save();
+       if(product){
+        return res.status(200).json({product, message: "Product created successfully", files: req.files});
+       } 
+       else{
+         res.json({error: "Failed to create Product "})
+       }
+      }
     }
     exports.getProducts = async (req, res)=>{
      const products = await Product.find();
@@ -41,7 +42,7 @@ Product.findOne({_id: req.params.id}).exec((err, product)=>{
        return res.status(422).json({error : err})
    }
        product.remove().then(result=>{
-         console.log(result)
+        
            return res.status(200).json({result, message: "Product Deleted successfully"})
        }).catch(err=>{
            console.log(err)

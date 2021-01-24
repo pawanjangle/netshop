@@ -1,67 +1,75 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
+import M from "materialize-css";
 const AddProduct = () => {
   const [productPicture, setProductPicture] = useState("");
   const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [selectCategory, setCategory] = useState("")
+  const [selectCategory, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const categories = useSelector(state => state.category.categories)
-  useEffect(()=>{
-  axios.get("/category/getcategory").then((res) => {
-    console.log(res)
-    dispatch({ type: "GET_CATEGORIES", payload: res.data.categories });
-  });
-}, []);
+  const categories = useSelector((state) => state.category.categories);
+  useEffect(() => {
+    axios.get("/category/getcategory").then((res) => {
+      console.log(res);
+      dispatch({ type: "GET_CATEGORIES", payload: res.data.categories });
+    });
+  }, []);
   const dispatch = useDispatch();
   const postProduct = () => {
     if (productPicture) {
-      const form = new FormData();  
+      const form = new FormData();
       form.append("description", description);
       form.append("name", product);
       form.append("quantity", quantity);
       form.append("price", price);
       form.append("category", selectCategory);
       form.append("productPicture", productPicture);
-      console.log(form)
+      console.log(form);
       axios.post("/product/create", form).then((res) => {
-        if(res.data.message){
-          dispatch({ type: "ADD_PRODUCT", payload: res.data.message})
+        if (res.data.message) {
+          M.toast({
+            html: res.data.message,
+            classes: "#00796b teal darken-2",
+            displayLength: 1000,
+          });
+        } else {
+          M.toast({
+            html: res.data.error,
+            classes: "#f50057 pink accent-3",
+            displayLength: 1000,
+          });
         }
-       if(res.data.error){
-        dispatch({ type: "ADD_PRODUCT_ERROR", payload: res.data.error})
-       }
       });
     }
   };
   return (
- 
-    <div className= "container" style={{width: "50%"}}>
-        <div className="form-group">
-          <label>Product</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Product name"
-            onChange={(e) => {
-              setProduct(e.target.value);
-            }}
-          />
-        </div>
+    <div className="container text-center" style={{ width: "50%" }}>
+      <div className="form-group">
+        <label>Product</label>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Product name"
+          onChange={(e) => {
+            setProduct(e.target.value);
+          }}
+        />
+      </div>
 
-        <div className="form-group">
-          <label>Description</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Description"
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          />
-        </div>
+      <div className="form-group">
+        <label>Description</label>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Description"
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
+        />
+      </div>
+      <div className="d-flex justify-content-between">
         <div className="form-group">
           <label>Price</label>
           <input
@@ -84,18 +92,27 @@ const AddProduct = () => {
             }}
           />
         </div>
+      </div>
+      <div className="d-flex justify-content-between">
         <div className="form-group">
-    <label>Select Category</label>
-    <select className="form-control" onChange={(e)=>{
-        setCategory(e.target.value)}}>
-      {categories ? categories.map(category=>{
-        return <>
-      <option 
-      >{category.name}</option>  
-        </>
-      }): "loading"}
-    </select>
-  </div>
+          <label>Select Category</label>
+          <select
+            className="form-control"
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+          >
+            {categories
+              ? categories.map((category) => {
+                  return (
+                    <>
+                      <option>{category.name}</option>
+                    </>
+                  );
+                })
+              : "loading"}
+          </select>
+        </div>
         <div className="form-group">
           <label>Product Image</label>
           <input
@@ -107,15 +124,16 @@ const AddProduct = () => {
             }}
           />
         </div>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => {
-            postProduct();
-          }}
-        >
-          Add Product
-        </button>
+      </div>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => {
+          postProduct();
+        }}
+      >
+        Add Product
+      </button>
     </div>
   );
 };

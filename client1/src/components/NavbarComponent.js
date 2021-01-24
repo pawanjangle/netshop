@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import M from "materialize-css";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import axios from "axios"
+import axios from "axios";
 const NavbarComponent = () => {
+  document.addEventListener("DOMContentLoaded", function () {
+    const elems = document.querySelectorAll(".sidenav");
+    const instances = M.Sidenav.init(elems);
+  });
   const dispatch = useDispatch();
   const history = useHistory();
   const cartItems = useSelector((state) => state.cart.cartItems);
+  console.log(cartItems)
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
   const signout = () => {
@@ -21,22 +27,18 @@ const NavbarComponent = () => {
           <>
             <li className="nav-item">
               <a>
-                <Link className="nav-link" to="/profile">
+                <Link className="" to="/profile">
                   My Account
                 </Link>
               </a>
-            </li>   
+            </li>
             <li className="nav-item">
               <a>
-                <Link
-                  className="nav-link"
-                  to="/signin"
-                  onClick={() => signout()}
-                >
+                <Link className="" to="/signin" onClick={() => signout()}>
                   Logout
                 </Link>
               </a>
-            </li>    
+            </li>
           </>,
         ];
       }
@@ -45,14 +47,14 @@ const NavbarComponent = () => {
           <>
             <li className="nav-item">
               <a>
-                <Link className="nav-link" to="/profile">
+                <Link className="" to="/profile">
                   My Account
                 </Link>
               </a>
             </li>
             <li className="nav-item active">
               <a>
-                <Link className="nav-link" to="/cart">
+                <Link className="" to="/cart">
                   <ShoppingCartOutlinedIcon />{" "}
                   {cartItems ? cartItems.length : "0"}
                 </Link>
@@ -61,35 +63,26 @@ const NavbarComponent = () => {
             </li>
             <li className="nav-item">
               <a>
-                <Link
-                  className="nav-link"
-                  to="/signin"
-                  onClick={() => signout()}
-                >
+                <Link className="" to="/signin" onClick={() => signout()}>
                   Logout
                 </Link>
               </a>
             </li>
           </>,
         ];
-      } 
-    }
-    else {
+      }
+    } else {
       return [
         <>
           <li className="nav-item active">
             <a>
-              <Link className="nav-link" to="/signin">
-                Signin
-              </Link>
+              <Link to="/signin">Signin</Link>
               <span className="sr-only">(current)</span>
             </a>
           </li>
           <li className="nav-item">
             <a>
-              <Link className="nav-link" to="/signup">
-                Signup
-              </Link>
+              <Link to="/signup">Signup</Link>
             </a>
           </li>
         </>,
@@ -97,26 +90,35 @@ const NavbarComponent = () => {
     }
   };
   return (
-    <div className="mb-3">
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
-        <Link to= "/">
-          <a className="navbar-brand">NETSHOP</a>
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">{renderList()}</ul>
+    <div>
+      <nav className="#4a148c purple darken-4" >
+        <div class="nav-wrapper">
+          <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
+            <a class="brand-logo"> NETSHOP</a>
+          </Link>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <ul className="">{renderList()}</ul>
+          </ul>
         </div>
       </nav>
+
+      <ul className="sidenav" id="mobile-demo">
+        <li>
+          <a href="sass.html">Sass</a>
+        </li>
+        <li>
+          <a href="badges.html">Components</a>
+        </li>
+        <li>
+          <a href="collapsible.html">Javascript</a>
+        </li>
+        <li>
+          <a href="mobile.html">Mobile</a>
+        </li>
+      </ul>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 const Cart = require("../models/cart");
 const {v4: uuidv4} = require("uuid");
 const Order = require("../Models/order");
-const stripe = require('stripe')(process.env.stripeSkey)
+const stripe = require('stripe')("sk_test_RM6s93kiQFW1hggt7lDQ1YHh00RpA9K1BC")
 exports.addItemToCart = async (req, res) => {
   const { id, quantity} = req.body;
   const cartExist = await Cart.findOne({ user: req.user._id });
@@ -45,6 +45,9 @@ exports.addItemToCart = async (req, res) => {
           price= price + item.product.price * item.quantity
         })  
         return res.status(200).json({ message: "Added to cart", cartItems: updated.cartItems, cartTotal: price });
+      }
+      else{
+        return res.json({error: "Failed to add to cart"})
       }
     }
   }
@@ -93,14 +96,14 @@ if(prevCustomer.data.length > 0){
 },{
     idempotencyKey: uuidv4()
 }) ;
-await new Order({
+const order = await new Order({
   user: req.user._id,
   email: paymentInfo.email,
-  total: price,
+  total: price * 100,
   cartItems: cart.cartItems
 }).save();
 const emaptyCart = await Cart.findOneAndUpdate({user: req.user._id},{ $set:{cartItems: []}}, {new: true});
-return res.status(200).json({message: "payment successful", charge, cartItems: emaptyCart})
+return res.status(200).json({message: "payment successful", charge, cartItems: emaptyCart, order})
 }
 else{
   const newCustomer = await stripe.customers.create({
@@ -116,13 +119,13 @@ else{
 },{
     idempotencyKey: uuidv4()
 });
-await new Order({
+const order =await new Order({
   user: req.user._id,
   email: paymentInfo.email,
   total : price,
   cartItems: cart.cartItems
 }).save();
 const emaptyCart =  await Cart.findOneAndUpdate({user: req.user._id},{ $set:{cartItems: []}}, {new: true});
-return res.status(200).json({message: "payment successful", charge, cartItems: emaptyCart})
+return res.status(200).json({message: "payment successful", charge, cartItems: emaptyCart, order })
 }
 }

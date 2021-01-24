@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useDispatch} from "react-redux"
+import M from "materialize-css";
 const AddCategory = () => {
   const [categoryPicture, setCategoryPicture] = useState("");
   const [categoryName, setName] = useState("");
@@ -16,11 +17,11 @@ const AddCategory = () => {
           },
         }).then((res) => {
           if(res.data.message){
-            dispatch({ type: "ADD_Category", payload: res.data.message})
+            M.toast({html: res.data.message, classes: "#00796b teal darken-2", displayLength: 1000  })
           }
-          if(res.data.error){
-            dispatch({ type: "ADD_CATEGORY_ERROR", payload: res.data.error })
-          }
+         else{
+          M.toast({html: res.data.error, classes: "#f50057 pink accent-3", displayLength: 1000  })     
+         }
         });
       }
   }
