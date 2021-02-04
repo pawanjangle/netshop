@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import M from "materialize-css";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import axios from "axios";
 const NavbarComponent = () => {
   document.addEventListener("DOMContentLoaded", function () {
     const elems = document.querySelectorAll(".sidenav");
@@ -13,9 +12,10 @@ const NavbarComponent = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(cartItems)
+  console.log(cartItems);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+  console.log(user)
   const signout = () => {
     localStorage.clear();
     dispatch({ type: "SIGNOUT_USER", payload: "logout successfully" });
@@ -24,14 +24,7 @@ const NavbarComponent = () => {
     if (token) {
       if (user.role === "admin") {
         return [
-          <>
-            <li className="nav-item">
-              <a>
-                <Link className="" to="/profile">
-                  My Account
-                </Link>
-              </a>
-            </li>
+          <>        
             <li className="nav-item">
               <a>
                 <Link className="" to="/signin" onClick={() => signout()}>
@@ -45,17 +38,21 @@ const NavbarComponent = () => {
       if (user.role === "user") {
         return [
           <>
-            <li className="nav-item">
+          <center>
+        <li class="collection-item avatar">
+           <img className="img-fluid" src={user.profilePic} style={{height: "60px", width:"60px"}} alt="" className="circle" />
+            </li>     
+           <li className="nav-item">
               <a>
                 <Link className="" to="/profile">
-                  My Account
+                 Hello, {user.firstName}
                 </Link>
               </a>
             </li>
             <li className="nav-item active">
               <a>
                 <Link className="" to="/cart">
-                  <ShoppingCartOutlinedIcon />{" "}
+                  <ShoppingCartOutlinedIcon />
                   {cartItems ? cartItems.length : "0"}
                 </Link>
                 <span className="sr-only">(current)</span>
@@ -63,11 +60,12 @@ const NavbarComponent = () => {
             </li>
             <li className="nav-item">
               <a>
-                <Link className="" to="/signin" onClick={() => signout()}>
+                <Link to="/signin" onClick={() => signout()}>
                   Logout
                 </Link>
               </a>
             </li>
+            </center>
           </>,
         ];
       }
@@ -91,33 +89,30 @@ const NavbarComponent = () => {
   };
   return (
     <div>
-      <nav className="#4a148c purple darken-4" >
-        <div class="nav-wrapper">
+      <nav className="#4a148c purple darken-4">
+        <div className="nav-wrapper">
           <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
-            <a class="brand-logo"> NETSHOP</a>
+            <a className="brand-logo"> NETSHOP</a>
           </Link>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-            <i class="material-icons">menu</i>
-          </a>
-          <ul class="right hide-on-med-and-down">
+          <Link to="#" data-target="mobile-demo" className="sidenav-trigger">
+            <i className="material-icons">menu</i>
+          </Link>
+          <ul className="right hide-on-med-and-down">
             <ul className="">{renderList()}</ul>
           </ul>
         </div>
       </nav>
 
       <ul className="sidenav" id="mobile-demo">
-        <li>
-          <a href="sass.html">Sass</a>
-        </li>
-        <li>
-          <a href="badges.html">Components</a>
-        </li>
-        <li>
-          <a href="collapsible.html">Javascript</a>
-        </li>
-        <li>
-          <a href="mobile.html">Mobile</a>
-        </li>
+        <div
+          className="#4a148c purple darken-4 d-flex justify-content-center align-items-center mb-3"
+          style={{ height: "60px" }}
+        >
+          <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
+            NETSHOP
+          </Link>
+        </div>
+        {renderList()}
       </ul>
     </div>
   );

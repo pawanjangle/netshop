@@ -1,31 +1,22 @@
 const initialState = {
-    addCategoryMessage: "",
-    error: "",
     categories: []
   };
-  const productReducer = (state = initialState, action) => {
+  const categoryReducer = (state = initialState, action) => {
     switch (action.type) {
-      case "ADD_CATEGORY":
-        return {
-          ...state,
-          addCategoryMessage: action.payload,   
-        };
-      case "ADD_CATEGORY_ERROR":
-        return {
-          ...state,
-          addCategoryMessage: null,
-          error: action.payload,
-        
-        };
         case "GET_CATEGORIES": 
         return{
             ...state,
             categories: action.payload
         }
+        case "DELETE_CATEGORY": 
+        return{
+            ...state,
+           categories: state.categories.filter(category=>category._id !== action.payload.result._id),        
+        }  
       default: {
         return state;
       }
     }
   };
-  export default productReducer;
+  export default categoryReducer;
   

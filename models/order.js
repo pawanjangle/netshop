@@ -6,6 +6,10 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    email: String,
+    total: {
+      type: Number,
+    },
     cartItems: [
       {
         product: {
@@ -13,19 +17,14 @@ const orderSchema = new mongoose.Schema(
           ref: "Product",
           required: true,
         },
-        quantity: {
-          type: Number,
-        },
-        total:{
-            type: Number         
-        }
-        // price: {
-        //   type: Number,
-        // },
+        quantity: Number,
+        total: Number
       },
     ],
+      
+      //   Items: []
+      // },
   },
-
   { timestamps: true }
-);
+  );
 module.exports = mongoose.model("Order", orderSchema);

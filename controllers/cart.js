@@ -1,6 +1,7 @@
 const Cart = require("../models/cart");
 const {v4: uuidv4} = require("uuid");
 const Order = require("../Models/order");
+const Product = require("../models/product");
 const stripe = require('stripe')("sk_test_RM6s93kiQFW1hggt7lDQ1YHh00RpA9K1BC")
 exports.addItemToCart = async (req, res) => {
   const { id, quantity} = req.body;
@@ -9,9 +10,10 @@ exports.addItemToCart = async (req, res) => {
     const productExist = cartExist.cartItems.some(
       (item) => id === item.product.toString()
     );
-    if(productExist){
+    if(productExist){    
+      const productData = await Product.findOne({_id: id});
     const updatedCart = await Cart.findOneAndUpdate({_id: cartExist._id, "cartItems.product": id}, {
-      $inc:{"cartItems.$.quantity": quantity}
+      $inc:{"cartItems.$.quantity": quantity, "cartItems.$.total": productData.price * quantity}
     }, {new: true}).populate("cartItems.product");
     let price = 0;
     updatedCart.cartItems.forEach(item=>{
@@ -19,8 +21,10 @@ exports.addItemToCart = async (req, res) => {
     })  
     return res.status(200).json({message: "added to cart", cartItems: updatedCart.cartItems, cartTotal: price})
     }
-    else{
-    const newProduct = {product: id, quantity}
+    else{ 
+      const productData = await Product.findOne({_id: id});
+   const productTotalPrice = productData.price * quantity;  
+    const newProduct = {product: id, quantity, total : productTotalPrice}
       const updatedCart = await Cart.findOneAndUpdate({_id: cartExist._id}, {$push:{cartItems: newProduct}}, {new: true}).populate("cartItems.product");
       let price = 0;
       updatedCart.cartItems.forEach(item=>{
@@ -34,9 +38,10 @@ exports.addItemToCart = async (req, res) => {
     });
     const cart = await newCart.save();
     if (cart) {
+      const productData = await Product.findOne({_id: id});
       const updated = await Cart.findByIdAndUpdate(
         cart._id,
-        { $push: { cartItems: { product: id, quantity } } },
+        { $push: { cartItems: { product: id, quantity, total: productData.price * quantity } } },
         { new: true }
       ).populate("cartItems.product");
       if (updated) {
@@ -54,7 +59,7 @@ exports.addItemToCart = async (req, res) => {
 };
 exports.removeItemFromCart = async (req, res) => {
       const {id} = req.body;
-      console.log(id)
+     
     const cartItems = await Cart.findOneAndUpdate({user: req.user._id}, {$pull: { cartItems: {product: id }}},
       {new: true}).populate("cartItems.product");
     if(cartItems){
@@ -70,7 +75,7 @@ exports.getCartItems = async (req, res) => {
     if(cart){ 
       let price = 0;
       cart.cartItems.forEach(item=>{
-        price= price + item.product.price * item.quantity
+        price = price + item.product.price * item.quantity
       })   
       return res.status(200).json({cartItems: cart.cartItems, cartTotal: price })
     }
@@ -102,8 +107,11 @@ const order = await new Order({
   total: price * 100,
   cartItems: cart.cartItems
 }).save();
-const emaptyCart = await Cart.findOneAndUpdate({user: req.user._id},{ $set:{cartItems: []}}, {new: true});
-return res.status(200).json({message: "payment successful", charge, cartItems: emaptyCart, order})
+if(order){
+  console.log(order)
+  const emaptyCart = await Cart.findOneAndUpdate({user: req.user._id},{ $set:{cartItems: []}}, {new: true});
+  return res.status(200).json({message: "payment successful", charge, cartItems: emaptyCart, order})
+}
 }
 else{
   const newCustomer = await stripe.customers.create({
@@ -119,13 +127,34 @@ else{
 },{
     idempotencyKey: uuidv4()
 });
+console.log(cart.cartItems)
 const order =await new Order({
   user: req.user._id,
   email: paymentInfo.email,
   total : price,
   cartItems: cart.cartItems
 }).save();
-const emaptyCart =  await Cart.findOneAndUpdate({user: req.user._id},{ $set:{cartItems: []}}, {new: true});
+if(order){
+  const emaptyCart =  await Cart.findOneAndUpdate({user: req.user._id},{ $set:{cartItems: []}}, {new: true});
 return res.status(200).json({message: "payment successful", charge, cartItems: emaptyCart, order })
 }
+}
+} 
+exports.ordersReceived = async (req, res)=>{
+  const orders = await Order.find().populate("cartItems.product").populate("user")
+  if(orders){
+      return res.status(200).json({ data: orders})
+  }
+  else{
+      return res.json({error: "something went wrong"})
+  }
+}
+exports.userOrders = async (req, res)=>{
+  const orders = await Order.find({user: req.user._id}).populate("cartItems.product")
+  if(orders){
+      return res.status(200).json({orders})
+  }
+  else{
+      return res.json({error: "something went wrong"})
+  }
 }

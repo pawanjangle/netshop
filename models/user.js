@@ -3,11 +3,15 @@ const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: true,
+      default: "user"
+    },
+    middleName: {
+      type: String,
+      default: "user"
     },
     lastName: {
       type: String,
-      required: true,
+      default: "user"
     },
     email: {
       type: String,
@@ -35,9 +39,13 @@ const userSchema = new mongoose.Schema(
     contactNumber: {
       type: String,
     },
-    profilePicture: {
+    profilePic:{
       type: String,
-    },
+      default: "https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+  },
+    fullName: {type: String },
+    resetToken: String,
+    expireToken: String,
   },
   { timestamps: true }
 );

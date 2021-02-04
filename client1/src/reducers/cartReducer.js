@@ -1,6 +1,7 @@
 const initialState = {
   cartItems: [],
-  cartTotal: ""
+  cartTotal: "",
+  error: ""
 };
 const cartReducer = (state = initialState, action) => {
   console.log(action);
@@ -9,30 +10,34 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: action.payload.cartItems,
-        cartTotal: action.payload.cartTotal
+        cartTotal: action.payload.cartTotal,
       };
-      break;
-  case "REMOVE_FROM_CART":
+    case "REMOVE_FROM_CART":
       return {
         ...state,
         cartItems: action.payload.cartItems,
-        cartTotal: action.payload.cartTotal
+        cartTotal: action.payload.cartTotal,
       };
-      break;
     case "GET_CARTITEMS":
       return {
         ...state,
         cartItems: action.payload.cartItems,
-        cartTotal: action.payload.cartTotal
+        cartTotal: action.payload.cartTotal,
       };
-      break;
-      case "CHECKOUT":
-        return{
-          ...state,
-          paymentMessage: action.payload.message,
-          cartItems: action.payload.cartItems
-        }
-        break;
+    case "CHECKOUT":
+      return {
+        ...state,
+        paymentMessage: action.payload.message,
+        cartItems: action.payload.cartItems,
+        cartTotal: 0,
+      };
+      
+    case "CHECKOUT_ERROR":
+      return {
+        ...state,
+      error: action.payload.error
+      };
+
     default: {
       return state;
     }

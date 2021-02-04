@@ -10,12 +10,6 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const categories = useSelector((state) => state.category.categories);
-  useEffect(() => {
-    axios.get("/category/getcategory").then((res) => {
-      console.log(res);
-      dispatch({ type: "GET_CATEGORIES", payload: res.data.categories });
-    });
-  }, []);
   const dispatch = useDispatch();
   const postProduct = () => {
     if (productPicture) {
@@ -26,7 +20,7 @@ const AddProduct = () => {
       form.append("price", price);
       form.append("category", selectCategory);
       form.append("productPicture", productPicture);
-      console.log(form);
+      console.log(selectCategory);
       axios.post("/product/create", form).then((res) => {
         if (res.data.message) {
           M.toast({
@@ -45,9 +39,8 @@ const AddProduct = () => {
     }
   };
   return (
-    <div className="container text-center" style={{ width: "50%" }}>
+    <div className="container" style={{ width: "50%" }}>
       <div className="form-group">
-        <label>Product</label>
         <input
           type="text"
           className="form-control"
@@ -59,7 +52,6 @@ const AddProduct = () => {
       </div>
 
       <div className="form-group">
-        <label>Description</label>
         <input
           type="text"
           className="form-control"
@@ -71,7 +63,6 @@ const AddProduct = () => {
       </div>
       <div className="d-flex justify-content-between">
         <div className="form-group">
-          <label>Price</label>
           <input
             type="text"
             className="form-control"
@@ -82,7 +73,6 @@ const AddProduct = () => {
           />
         </div>
         <div className="form-group">
-          <label>Quantity</label>
           <input
             type="text"
             className="form-control"
@@ -97,10 +87,9 @@ const AddProduct = () => {
         <div className="form-group">
           <label>Select Category</label>
           <select
-            className="form-control"
-            onChange={(e) => {
+            className="form-control"  onClick={(e) => {
               setCategory(e.target.value);
-            }}
+            }}        
           >
             {categories
               ? categories.map((category) => {
@@ -114,7 +103,6 @@ const AddProduct = () => {
           </select>
         </div>
         <div className="form-group">
-          <label>Product Image</label>
           <input
             type="file"
             className="form-control-file"

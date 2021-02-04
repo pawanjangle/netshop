@@ -8,6 +8,8 @@ const initialState = {
   cartItems: "",
   cartTotal: 0,
   removeFromCartMessage: "",
+  error: "",
+  authenticated: false
 };
 const signupUser = (state = initialState, action) => {
   switch (action.type) {
@@ -15,15 +17,13 @@ const signupUser = (state = initialState, action) => {
       return {
         ...state,
         signupMessage: action.payload.message,
-      };
-      break;
+      };    
     case "SIGNUP_ERROR":
       return {
         ...state,
         signupMessage: null,
         signupError: action.payload.error,
-      };
-      break;
+      };  
     case "SIGNIN_USER":
       return {
         ...state,
@@ -31,16 +31,15 @@ const signupUser = (state = initialState, action) => {
         token: action.payload.token,
         user: action.payload.user,
         cartItems: action.payload.cartItems,
-      };
-      break;
+        authenticated: true
+      };  
     case "SIGNOUT_USER":
       return {
         ...state,
         token: null,
         signinMessage: null,
         authenticated: false,
-      };
-      break;
+      };  
     case "SIGNIN_ERROR":
       return {
         ...state,
@@ -49,8 +48,16 @@ const signupUser = (state = initialState, action) => {
         token: null,
         authenticated: false,
       };
-      break;
-
+    case "UPDATE_PROFILEPIC":
+      return {
+        ...state,
+        user: action.payload.user
+      };
+    case "UPDATE_PROFILEPIC_ERROR":
+      return {
+        ...state,
+       error: action.payload.error
+      };
     default: {
       return state;
     }
