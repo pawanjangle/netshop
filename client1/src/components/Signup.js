@@ -41,6 +41,7 @@ const Signup = () => {
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center my-5 flex-wrap">
       <div className="card col-md-8 d-flex flex-column">
+      <h4 className="text-center logo">NETSHOP</h4>
         <h4 className="text-center">SIGNUP FORM</h4>
         <div className="d-flex justify-content-around flex-wrap">
           <div className="form-group col-md-4">

@@ -56,7 +56,7 @@ axios.post("/user/googlelogin", data).then(res=>{
     }
   };
   return (
-    <div className="col-md-6  text-center">
+    <div className="col-md-6 text-center">
       <GoogleLogin
         clientId="656155426164-p6dqate1336u6bh58nif35jedt5ikbpg.apps.googleusercontent.com"
         buttonText="Login"

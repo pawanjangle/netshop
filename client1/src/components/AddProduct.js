@@ -39,7 +39,8 @@ const AddProduct = () => {
     }
   };
   return (
-    <div className="container" style={{ width: "50%" }}>
+    <div className="container-fluid d-flex justify-content-center m-3">
+      <div className="card p-5 col-md-6">
       <div className="form-group">
         <input
           type="text"
@@ -83,7 +84,7 @@ const AddProduct = () => {
           />
         </div>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between align-items-center">
         <div className="form-group">
           <label>Select Category</label>
           <select
@@ -122,6 +123,7 @@ const AddProduct = () => {
       >
         Add Product
       </button>
+    </div>
     </div>
   );
 };

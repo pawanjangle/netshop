@@ -15,7 +15,7 @@ const NavbarComponent = () => {
   console.log(cartItems);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
-  console.log(user)
+  console.log(user);
   const signout = () => {
     localStorage.clear();
     dispatch({ type: "SIGNOUT_USER", payload: "logout successfully" });
@@ -24,7 +24,23 @@ const NavbarComponent = () => {
     if (token) {
       if (user.role === "admin") {
         return [
-          <>        
+          <>
+                <li class="collection-item avatar">
+                <Link to="/userprofile"> <img
+                    className="img-fluid"
+                    src={user.profilePic}
+                    style={{ height: "60px", width: "60px" }}
+                    alt=""
+                    className="circle"
+                  />  </Link>
+                </li> 
+                <li className="nav-item">
+                <a>
+                  <Link className="" to="/userprofile">
+                    Hello, {user.firstName}
+                  </Link>
+                </a>
+              </li>
             <li className="nav-item">
               <a>
                 <Link className="" to="/signin" onClick={() => signout()}>
@@ -38,33 +54,40 @@ const NavbarComponent = () => {
       if (user.role === "user") {
         return [
           <>
-          <center>
-        <li class="collection-item avatar">
-           <img className="img-fluid" src={user.profilePic} style={{height: "60px", width:"60px"}} alt="" className="circle" />
-            </li>     
-           <li className="nav-item">
-              <a>
-                <Link className="" to="/profile">
-                 Hello, {user.firstName}
-                </Link>
-              </a>
-            </li>
-            <li className="nav-item active">
-              <a>
-                <Link className="" to="/cart">
-                  <ShoppingCartOutlinedIcon />
-                  {cartItems ? cartItems.length : "0"}
-                </Link>
-                <span className="sr-only">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a>
-                <Link to="/signin" onClick={() => signout()}>
-                  Logout
-                </Link>
-              </a>
-            </li>
+            <center>
+              
+                <li class="collection-item avatar">
+                <Link to="/userprofile"> <img
+                    className="img-fluid"
+                    src={user.profilePic}
+                    style={{ height: "60px", width: "60px" }}
+                    alt=""
+                    className="circle"
+                  />  </Link>
+                </li>           
+              <li className="nav-item">
+                <a>
+                  <Link className="" to="/profile">
+                    Hello, {user.firstName}
+                  </Link>
+                </a>
+              </li>             
+              <li className="nav-item active">
+                <a>
+                  <Link className="" to="/cart">
+                    <ShoppingCartOutlinedIcon />
+                    {cartItems ? cartItems.length : "0"}
+                  </Link>
+                  <span className="sr-only">(current)</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a>
+                  <Link to="/signin" onClick={() => signout()}>
+                    Logout
+                  </Link>
+                </a>
+              </li>
             </center>
           </>,
         ];
@@ -88,11 +111,11 @@ const NavbarComponent = () => {
     }
   };
   return (
-    <div>
-      <nav className="#4a148c purple darken-4">
+    <div className="navbar-fixed">
+      <nav className="#4a148c purple darken-4 pl-3">
         <div className="nav-wrapper">
           <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
-            <a className="brand-logo"> NETSHOP</a>
+            <a className="brand-logo logo"> NETSHOP</a>
           </Link>
           <Link to="#" data-target="mobile-demo" className="sidenav-trigger">
             <i className="material-icons">menu</i>

@@ -5,6 +5,7 @@ import M from "materialize-css";
 const UserProfile = () => {
   const dispatch = useDispatch();
   const [image, setImage] = useState("");
+  const [mob, setMob] = useState("");
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     if (image) {
@@ -35,6 +36,29 @@ const UserProfile = () => {
         });
     }
   }, [image]);
+  const updateMobileNo = ()=>{
+    axios.post("user/updatemob", {mob},{
+      headers: {
+        Authorization: "bearer " + localStorage.getItem("token"),
+      },
+    }).then(res=>{
+      if(res.data.message){
+        M.toast({
+          html: res.data.message,
+          classes: "#00796b teal darken-2",
+          displayLength: 1000,
+        });
+        dispatch({type: "UPDATE_MOB_NO", payload: res.data})      
+      }
+      else{
+        M.toast({
+          html: res.data.error,
+          classes: "#f50057 pink accent-3",
+          displayLength: 1000,
+        });     
+      }
+    })
+  }
   return (
     <div className="container-fluid d-flex justify-content-center mt-5">
       <div className="card py-3">
@@ -44,7 +68,7 @@ const UserProfile = () => {
             className="img-fluid"
             src={user.profilePic}
             alt=""
-            style={{ width: "50%" }}
+            style={{ maxHeight: "200px" }}
           />
           <div className="file-field input-field">
             <div className="btn">
@@ -65,11 +89,18 @@ const UserProfile = () => {
          <h6>Email:</h6> <p> {user.email}</p>
          <h6>Mob. No:</h6>
          {user.contactNumber ? (<div><p>{user.contactNumber}</p> 
-          <input placeholder="Enter 10 digit Mobile No." /> <button className="btn">Edit Mobile No.</button></div>)
+          <input placeholder="Enter 10 digit Mobile No." onChange={(e)=>{
+          setMob(e.target.value)}}/> <button className="btn" onClick={()=>{
+            updateMobileNo()
+          }}>Update Mobile No.</button></div>)
          : (
            <div>
-        <div className="text-center"><input placeholder="Enter 10 digit Mobile No."/>
-         <button className="btn">ADD Mobile No.</button></div> 
+        <div className="text-center"><input placeholder="Enter 10 digit Mobile No." onChange={(e)=>{
+          setMob(e.target.value)
+        }}/>
+         <button className="btn" onClick={()=>{
+           updateMobileNo()
+         }}>ADD Mobile No.</button></div> 
          </div>)}
         </div>
       </div>

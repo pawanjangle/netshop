@@ -26,10 +26,10 @@ const AddCategory = () => {
       }
   }
   return (
-    <div>
+    <div className="container-fluid d-flex justify-content-center mt-3">
+      <div className="card col-md-6 p-4 d-flex flex-column justify-content-center">
       <h3>Add Category</h3>
-      <div className="form-group">
-        <label>Name</label>
+      <div className="form-group">     
         <input
           type="text"
           className="form-control"
@@ -49,6 +49,7 @@ const AddCategory = () => {
           }}
         />
       </div>
+      <div className="text-center">
       <button
         type="button"
         className="btn btn-primary"
@@ -58,6 +59,8 @@ const AddCategory = () => {
       >
         Add Category
       </button>
+      </div>
+      </div>
     </div>
   );
 };

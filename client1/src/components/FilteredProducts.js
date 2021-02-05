@@ -3,20 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import M from "materialize-css";
-import NewArrivals from "./NewArrivals";
 import CategoryList from "./CategoryList";
 import TextTrim from "react-text-trim";
-const ProductComponent = () => {
+const FilteredProducts = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  const products = useSelector((state) => state.product.products);
   const token = useSelector((state) => state.auth.token);
-  useEffect(() => {
-    axios.get("/category/getcategory").then((res) => {
-      console.log(res);
-      dispatch({ type: "GET_CATEGORIES", payload: res.data.categories });
-    });
-  }, []);
+  const filteredProducts = useSelector(
+    (state) => state.product.filteredProducts
+  );
+  console.log(filteredProducts)
   const addProductData = (id) => {
     axios
       .put(
@@ -42,43 +38,39 @@ const ProductComponent = () => {
   return (
     <div>
       <CategoryList />
-      <NewArrivals />
       <div className="container-fluid pt-4">
         <div className="d-flex flex-wrap justify-content-center">
-          {products
-            ? products.map((product) => {
+          {filteredProducts
+            ? filteredProducts.map((product) => {
                 return (
                   <>
                     <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
                       <div className="card mr-3">
-                        <Link to={`/productdetails/${product._id}`}>
-                          {" "}
-                          <div
-                            style={{ minHeight: "250px" }}
-                            className="d-flex justify-content-center align-items-center"
-                          >
-                            <img
-                              className="card-img-top img-fluid col-sm-6 col-md-6"
-                              src={product.productPicture}
-                              alt=""
-                              style={{ width: "80%" }}
-                            />
-                          </div>
-                        </Link>
-                        <div className="card-body text-center">
-                          <TextTrim
-                            refId="TextTrim"
-                            text={product.name}
-                            minLines={2}
-                            showMoreLabel="Show More"
-                            showLessLabel="Show Less"
-                            delimiter="..."
-                            fontSize={14}
-                            lineHeight={16}
-                            containerStyle={{}}
-                            textWrapperStyle={{}}
-                            buttonStyle={{}}
+                        <div
+                          style={{ minHeight: "250px" }}
+                          className="d-flex justify-content-center align-items-center"
+                        >
+                          <img
+                            className="card-img-top img-fluid col-sm-6 col-md-6"
+                            src={product.productPicture}
+                            alt=""
+                            style={{ width: "80%" }}
                           />
+                        </div>
+                        <div className="card-body text-center">                                                           
+                        <TextTrim
+                          refId="TextTrim"
+                          text={product.name}
+                          minLines={2}                                          
+                          showMoreLabel="Show More"
+                          showLessLabel="Show Less"
+                          delimiter="..."
+                          fontSize={14}
+                          lineHeight={16}
+                          containerStyle={{}}
+                          textWrapperStyle={{}}
+                          buttonStyle={{}}
+                        />  
                           <h6>₹ {product.price}</h6>
                           <div className="d-flex justify-content-around align-items-center">
                             <div className="form-group">
@@ -104,7 +96,7 @@ const ProductComponent = () => {
                               >
                                 <Link
                                   className="text-white"
-                                  to={token ? "/" : "/signin"}
+                                  to={token ? "/filteredproducts" : "/signin"}
                                 >
                                   Add To Cart
                                 </Link>
@@ -123,5 +115,4 @@ const ProductComponent = () => {
     </div>
   );
 };
-
-export default ProductComponent;
+export default FilteredProducts;

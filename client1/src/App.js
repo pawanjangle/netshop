@@ -30,6 +30,8 @@ import AdminOrder from "./components/AdminOrder";
 import Reset from "./components/Reset";
 import UserProfile from "./components/UserProfile";
 import UserOrders from "./components/UserOrders";
+import FilteredProducts from "./components/FilteredProducts";
+import ProductDetails from "./components/ProductDetails";
 const SecuredRoute = (props) => {
   const auth = useSelector((state) => state.auth.authenticated);
   return (
@@ -52,8 +54,7 @@ const Routing = () => {
   useEffect(async () => {
     const token = localStorage.getItem("token");
     if (token) {
-      const verified = jwt.verify(token, "adgjmp100@");
-      console.log(verified)
+      const verified = jwt.verify(token, "adgjmp100@");   
       if (verified) {
         axios
           .get("/user/userprofile", {
@@ -114,9 +115,11 @@ const Routing = () => {
         <SecuredRoute path="/admin/allproducts" component={AllProducts} />
         <SecuredRoute path="/admin/updateproduct/:id" component={UpdateProduct} />
         <SecuredRoute path="/admin/updatecategory/:id" component={UpdateCategory} />
+        <Route path="/productdetails/:id" component={ProductDetails} />
         <SecuredRoute path="/checkout" component={Checkout} />
         <SecuredRoute path="/userprofile" component={UserProfile} />
         <SecuredRoute path="/userorders" component={UserOrders} />
+        <Route path="/filteredproducts" component={FilteredProducts} />
 
         <Route exact path="/reset" component={Reset} />
         <Route path="/reset/:token" component={NewPassword} />

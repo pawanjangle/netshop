@@ -84,7 +84,7 @@ exports.getProduct = async (req, res) => {
 };
 exports.getProductsByCategory = async (req, res)=>{
   const {category} = req.body;
-const products = await Product.find({category})
+const products = await Product.find({category}).sort({price: 1})
 if(products){
   res.status(200).json({products})
 }
@@ -92,3 +92,12 @@ else{
   res.json({error: "something went wrong"})
 }
 }
+exports.productDetails = async (req, res) => {
+  const { id } = req.params;
+  const product = await Product.findOne({ _id: id });
+  if (product) {
+    return res.status(200).json({ product });
+  } else {
+    return res.json({ error: "something went wrong" });
+  }
+};

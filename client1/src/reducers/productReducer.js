@@ -2,7 +2,7 @@ const initialState = {
   products: "",
   message: "",
   error: "",
-  filteredProducts: []
+  filteredProducts: ""
 };
 const productReducer = (state = initialState, action) => {
   switch (action.type) {

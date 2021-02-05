@@ -58,6 +58,11 @@ const signupUser = (state = initialState, action) => {
         ...state,
        error: action.payload.error
       };
+      case "UPDATE_MOB_NO":
+        return {
+          ...state,
+          user: action.payload.user
+        }     
     default: {
       return state;
     }

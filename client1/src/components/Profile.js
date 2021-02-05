@@ -28,7 +28,7 @@ if(user.role === "admin"){
   return (
     <div className="container d-flex flex-wrap justify-content-around">
       <Link to= "/admin/allproducts"><div className="card d-flex flex-column justify-content-center flex-wrap" style= {{width: "18rem"}}>
-     <center><img className="card-img-top img-fluid" src="https://www.nicepng.com/png/detail/304-3048415_business-advice-product-icon-png.png" alt="" style ={{width:"50%"}}/>
+     <center><img className="card-img-top img-fluid" src="https://www.pngfind.com/pngs/m/273-2731133_png-file-product-and-service-icon-transparent-png.png" alt="" style ={{width:"47%"}}/>
       <div className="card-body">
         <h5 className="card-title">Products</h5>                   
       </div></center> 
@@ -61,7 +61,7 @@ if(user.role === "admin"){
 }
 }
   return (
-    <div>
+    <div className="mt-3">
         {renderList()}
     </div>
   );

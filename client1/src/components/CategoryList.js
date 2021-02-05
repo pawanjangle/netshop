@@ -8,27 +8,23 @@ const CategoryList = () => {
   const categories = useSelector((state) => state.category.categories);
   console.log(categories);
   const getProductsByCategory = (category)=>{
-      axios.post("/product/getproductsbycategory", {category}, {
-        headers: {
-          Authorization: "bearer " + localStorage.getItem("token"),
-        },
-      } ).then(res=>{
+      axios.post("/product/getproductsbycategory", {category} ).then(res=>{
           dispatch({type: "PRODUCTS_BY_CATEGORY", payload: res.data})
       })
   }
   return (
     <div>
-      <nav className="nav-extended">
+      <nav className="nav-extended #d500f9 purple accent-3">
         <div className="nav-wrapper">
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-            <i class="material-icons">menu</i>
+          <a href="#" data-target="mobile-demo" className="sidenav-trigger">
+            <i className="material-icons" >menu</i>
           </a>
           {categories ? (
             categories.map((category, index) => {
               return (
-                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <ul id="nav-mobile" className="left hide-on-med-and-down">
                   <div>
-                    <Link to="/productsbycategory">
+                    <Link to="/filteredproducts">
                       <li onClick={()=>{
                           getProductsByCategory(category.name)
                       }}>{category.name}</li> 

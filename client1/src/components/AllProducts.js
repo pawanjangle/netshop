@@ -40,38 +40,24 @@ const AllProducts = () => {
       dispatch({ type: "ALL_PRODUCTS", payload: res.data.products });
     });
   }, []);
-  const updateProduct = (id) => {
-    console.log(id);
-    axios
-      .delete("/updateproduct", id, {
-        headers: {
-          Authorization: "bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      });
-  };
-
   return (
     <div className="mt-3">
-      
-     <Link to="/admin/addproduct"><button className="btn btn-success">Add Product</button></Link>
-     <h5 className="text-center">All Products</h5>
-      <table className="table table-hover table-dark">
+     <div className="d-flex align-items-center justify-content-around"> <Link to="/admin/addproduct"><button className="btn btn-success">Add Product</button></Link>
+     <h5>All Products</h5></div>   
+      <table className="table table-hover table-dark table-responsive{-sm|-md|-lg|-xl}">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Product Image</th>
-            <th scope="col" className="colspan = 2">
+            <th scope="col" className="colspan = 2 text-center">
               Operation
             </th>
           </tr>
         </thead>
         <tbody>
           {products.products
-            ? products.products.map((product, index) => {
+            ? products.products.map((product, index) => {           
                 return (
                   <>
                     <tr key={index}>
@@ -85,7 +71,8 @@ const AllProducts = () => {
                         />
                       </td>
                       <td>
-                        <Link to={`/admin/updateproduct/${product._id}`}>                     
+                      <div className="d-flex justify-content-between">
+                        <Link to={`/admin/updateproduct/${product._id}`}>                                          
                           <button
                             className="btn btn-warning"
                             onClick={() => {}}
@@ -93,8 +80,6 @@ const AllProducts = () => {
                             Update
                           </button>
                         </Link>
-                      </td>
-                      <td>
                         <button
                           className="btn btn-danger"
                           onClick={() => {
@@ -103,7 +88,8 @@ const AllProducts = () => {
                         >
                           Delete
                         </button>
-                      </td>
+                        </div> 
+                      </td>                     
                     </tr>
                   </>
                 );

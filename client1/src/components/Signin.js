@@ -14,7 +14,6 @@ const Signin = () => {
   const postData = () => {
     const data = { email, password };
     axios.post("/user/signin", data).then((res) => {
-      console.log(res);
       if (res.data.message) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", res.data.user);
@@ -70,9 +69,10 @@ const Signin = () => {
     });
   };
   return (
-    <div className="container-fluid d-flex justify-content-center">       
+    <div className="container-fluid d-flex justify-content-center mt-5">       
       <div className="card d-flex flex-column justify-content-center align-items-center col-md-8 flex-wrap py-4">
-        <h4 className="text-center">SIGNIN FORM</h4>
+        <h4 className="text-center logo">NETSHOP</h4>
+        <h5 className="text-center">SIGNIN FORM</h5>
         <div className="form-group col-md-8">
           <input
             type="email"

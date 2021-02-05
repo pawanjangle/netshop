@@ -62,9 +62,9 @@ const UpdateProduct = () => {
     }
   };
   return (
-    <div className="container" style={{ width: "50%" }}>
+    <div className="container-fluid d-flex justify-content-center mt-3" >
+      <div className="card col-md-6 p-4">   
       <div className="form-group">
-        <label>Product</label>
         <input
           type="text"
           className="form-control"
@@ -77,7 +77,7 @@ const UpdateProduct = () => {
       </div>
 
       <div className="form-group">
-        <label>Description</label>
+    
         <input
           type="text"
           className="form-control"
@@ -90,7 +90,7 @@ const UpdateProduct = () => {
       </div>
       <div className="d-flex justify-content-between">
         <div className="form-group">
-          <label>Price</label>
+    
           <input
             type="text"
             className="form-control"
@@ -102,7 +102,7 @@ const UpdateProduct = () => {
           />
         </div>
         <div className="form-group">
-          <label>Quantity</label>
+      
           <input
             type="text"
             className="form-control"
@@ -114,7 +114,7 @@ const UpdateProduct = () => {
           />
         </div>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between align-items-center">
         <div className="form-group">
           <label>Select Category</label>
           <select
@@ -147,6 +147,7 @@ const UpdateProduct = () => {
           />
         </div>
       </div>
+      <div className="text-center">
     <button
         type="button"
         className="btn btn-primary"
@@ -156,6 +157,8 @@ const UpdateProduct = () => {
       >
         Update Product
       </button>
+      </div>
+    </div>
     </div>
   );
 };

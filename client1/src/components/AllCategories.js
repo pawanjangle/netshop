@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import {Redirect, Link} from "react-router-dom"
+import { Redirect, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import M from "materialize-css";
 const AllCategories = () => {
@@ -38,13 +38,19 @@ const AllCategories = () => {
   };
   return (
     <div className="mt-3">
-      <table className="table table-hover table-dark">
+      <div className="d-flex justify-content-around">
+        <Link to="/admin/addcategory">
+          <button className="btn btn-success">Add Category</button>
+        </Link>
+        <h5>All Categories</h5>
+      </div>
+      <table className="table table-hover table-dark table-responsive{-sm|-md|-lg|-xl}">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Category Image</th>
-            <th scope="col" className="colspan = 2">
+            <th scope="col" className="colspan = 2 text-center">
               Operation
             </th>
           </tr>
@@ -64,22 +70,20 @@ const AllCategories = () => {
                     />
                   </td>
                   <td>
-                   <Link to ={`/admin/updatecategory/${category._id}`}> <button
-                      className="btn btn-warning"                    
-                    >
-                      Update
-                    </button>
-                    </Link>
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => {
-                        deleteCategory(category._id);
-                      }}
-                    >
-                      Delete
-                    </button>
+                    <div className="d-flex justify-content-between">
+                      <Link to={`/admin/updatecategory/${category._id}`}>
+                        {" "}
+                        <button className="btn btn-warning">Update</button>
+                      </Link>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => {
+                          deleteCategory(category._id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               </>
