@@ -69,10 +69,10 @@ const Signin = () => {
     });
   };
   return (
-    <div className="container-fluid d-flex justify-content-center mt-5">       
+    <div className="container-fluid d-flex justify-content-center p-4">       
       <div className="card d-flex flex-column justify-content-center align-items-center col-md-8 flex-wrap py-4">
         <h4 className="text-center logo">NETSHOP</h4>
-        <h5 className="text-center">SIGNIN FORM</h5>
+        <h5 className="text-center font-weight-bold text-danger">SIGNIN FORM</h5>
         <div className="form-group col-md-8">
           <input
             type="email"
@@ -96,7 +96,7 @@ const Signin = () => {
         >
           Submit
         </button>
-        <h6>
+        <h6 className="mt-4">
           <Link to="/reset">Forgot Password ?</Link>
         </h6>
         <h5>

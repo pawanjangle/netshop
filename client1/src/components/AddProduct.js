@@ -40,7 +40,8 @@ const AddProduct = () => {
   };
   return (
     <div className="container-fluid d-flex justify-content-center m-3">
-      <div className="card p-5 col-md-6">
+      <div className="card col-md-6">
+        <h4 className="text-center text-danger font-weight-bold">ADD PRODUCT FORM</h4>
       <div className="form-group">
         <input
           type="text"

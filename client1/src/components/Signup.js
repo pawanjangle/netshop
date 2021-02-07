@@ -39,10 +39,10 @@ const Signup = () => {
     });
   };
   return (
-    <div className="container-fluid d-flex flex-column justify-content-center align-items-center my-5 flex-wrap">
-      <div className="card col-md-8 d-flex flex-column">
+    <div className="container-fluid d-flex justify-content-center p-4">
+      <div className="card col-md-8">
       <h4 className="text-center logo">NETSHOP</h4>
-        <h4 className="text-center">SIGNUP FORM</h4>
+        <h5 className="text-center text-danger font-weight-bold">SIGNUP FORM</h5>
         <div className="d-flex justify-content-around flex-wrap">
           <div className="form-group col-md-4">
             <input

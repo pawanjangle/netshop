@@ -37,12 +37,12 @@ const AllCategories = () => {
       });
   };
   return (
-    <div className="mt-3">
-      <div className="d-flex justify-content-around">
+    <div className="">
+      <div className="d-flex justify-content-between col-md-8 align-items-center">
         <Link to="/admin/addcategory">
           <button className="btn btn-success">Add Category</button>
         </Link>
-        <h5>All Categories</h5>
+        <h5 className="text-danger">All Categories</h5>
       </div>
       <table className="table table-hover table-dark table-responsive{-sm|-md|-lg|-xl}">
         <thead>
@@ -56,11 +56,11 @@ const AllCategories = () => {
           </tr>
         </thead>
         <tbody>
-          {categories.categories.map((category) => {
+          {categories.categories.map((category, index) => {
             return (
               <>
                 <tr>
-                  <th scope="row">1</th>
+                  <th scope="row">{index + 1}</th>
                   <td>{category.name}</td>
                   <td>
                     <img
@@ -70,7 +70,7 @@ const AllCategories = () => {
                     />
                   </td>
                   <td>
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-between flex-wrap">
                       <Link to={`/admin/updatecategory/${category._id}`}>
                         {" "}
                         <button className="btn btn-warning">Update</button>

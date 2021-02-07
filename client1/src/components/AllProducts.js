@@ -41,9 +41,9 @@ const AllProducts = () => {
     });
   }, []);
   return (
-    <div className="mt-3">
-     <div className="d-flex align-items-center justify-content-around"> <Link to="/admin/addproduct"><button className="btn btn-success">Add Product</button></Link>
-     <h5>All Products</h5></div>   
+    <div className="">
+     <div className="d-flex align-items-center justify-content-between col-md-8"> <Link to="/admin/addproduct"><button className="btn btn-success">Add Product</button></Link>
+     <h5 className="text-danger font-weight-bold">All Products</h5></div>   
       <table className="table table-hover table-dark table-responsive{-sm|-md|-lg|-xl}">
         <thead>
           <tr>
@@ -61,7 +61,7 @@ const AllProducts = () => {
                 return (
                   <>
                     <tr key={index}>
-                      <th scope="row">1</th>
+                      <th scope="row">{index + 1}</th>
                       <td>{product.name}</td>
                       <td>
                         <img
@@ -71,7 +71,7 @@ const AllProducts = () => {
                         />
                       </td>
                       <td>
-                      <div className="d-flex justify-content-between">
+                      <div className="d-flex justify-content-between flex-wrap">
                         <Link to={`/admin/updateproduct/${product._id}`}>                                          
                           <button
                             className="btn btn-warning"

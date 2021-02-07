@@ -117,7 +117,7 @@ const NavbarComponent = () => {
           <ul className="right hide-on-med-and-down">{renderList()}</ul>
         </div>
       </nav>
-
+   
       <ul className="sidenav text-center" id="mobile-demo">
         <div
           className="#4a148c purple darken-4 d-flex justify-content-center align-items-center mb-3"

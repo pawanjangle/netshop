@@ -27,8 +27,8 @@ const AddCategory = () => {
   }
   return (
     <div className="container-fluid d-flex justify-content-center mt-3">
-      <div className="card col-md-6 p-4 d-flex flex-column justify-content-center">
-      <h3>Add Category</h3>
+      <div className="card col-md-6 py-4">
+      <h4 className="text-center text-danger font-weight-bold">ADD CATEGORY FORM</h4>
       <div className="form-group">     
         <input
           type="text"

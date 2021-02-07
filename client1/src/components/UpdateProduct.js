@@ -19,7 +19,6 @@ const UpdateProduct = () => {
         Authorization: "bearer " + localStorage.getItem("token"),
       },
     }).then((res) => {
-      console.log(res)
       const {productPicture, name, quantity,category,price, description} = res.data.product;
       setProductPicture(productPicture);
       setProduct(name)
@@ -64,6 +63,7 @@ const UpdateProduct = () => {
   return (
     <div className="container-fluid d-flex justify-content-center mt-3" >
       <div className="card col-md-6 p-4">   
+      <h4 className="text-center text-danger font-weight-bold">UPDATE PRODUCT FORM</h4>
       <div className="form-group">
         <input
           type="text"

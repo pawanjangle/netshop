@@ -50,7 +50,8 @@ const UpdateCategory = () => {
   };
   return (
     <div className="continer-fluid d-flex justify-content-center mt-3">
-      <div className="card col-md-6 p-4">
+      <div className="card col-md-6 py-4">
+      <h4 className="text-center text-danger font-weight-bold">UPDATE CATEGORY FORM</h4>
         <h5 className="text-center">Update Category</h5>
         <div className="form-group">
           <input
