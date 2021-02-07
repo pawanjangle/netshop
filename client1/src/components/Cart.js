@@ -5,7 +5,7 @@ import M from "materialize-css";
 import { useDispatch, useSelector } from "react-redux";
 import Checkout from "./Checkout";
 import TextTrim from "react-text-trim";
-import CategoryList from "./CategoryList";
+import CategoryList from "./CategoryNav";
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
@@ -35,7 +35,6 @@ const Cart = () => {
   };
   return (
     <div>
-      <CategoryList/>
       <div className="container-fluid d-flex flex-wrap mt-2">
         <div className="col-md-10 d-flex flex-column card">
           <h4 className="mb-3">Shopping Cart</h4>

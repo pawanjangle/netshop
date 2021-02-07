@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import M from "materialize-css";
-import CategoryList from "./CategoryList";
+import CategoryList from "./CategoryNav";
 import TextTrim from "react-text-trim";
 const FilteredProducts = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,6 @@ const FilteredProducts = () => {
   };
   return (
     <div>
-      <CategoryList />
       <div className="container-fluid pt-4">
         <div className="d-flex flex-wrap justify-content-center">
           {filteredProducts

@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import {useParams} from "react-router-dom";
 import axios from "axios"
 import {useSelector} from "react-redux"
-import CategoryList from './CategoryList';
 const ProductDetails = () => {
     const [product, setProduct] = useState("")
 const {id} = useParams();
@@ -14,8 +13,7 @@ axios.get(`/product/productdetails/${id}`).then(res=>{
 })
 }, [])
     return (
-        <div>
-            <CategoryList/>
+        <div>           
             <div className="container-fluid">
         <div className="card p-3">
         <div className="d-flex flex-wrap align-items-center">

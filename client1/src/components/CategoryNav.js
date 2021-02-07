@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Preloader from "./Preloader";
-const CategoryList = () => {
+const CategoryNav = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
   console.log(categories);
@@ -14,10 +14,13 @@ const CategoryList = () => {
   };
   return (
     <div>
+      <nav className="hide-on-med-and-down">
+        <div class="nav-wrapper #d500f9 purple accent-3">
+          <ul className="left">
             {categories ? (
               categories.map((category, index) => {
                 return (
-                  <ul className="text-center">
+                  <>
                     <li
                       className="nav-item"
                       onClick={() => {
@@ -26,14 +29,17 @@ const CategoryList = () => {
                     >
                       <Link to="/filteredproducts">{category.name}</Link>
                     </li>
-                  </ul>
+                  </>
                 );
               })
             ) : (
-              <Preloader/>
+              <Preloader />
             )}
+          </ul>
+        </div>
+      </nav>
     </div>
   );
 };
 
-export default CategoryList;
+export default CategoryNav;

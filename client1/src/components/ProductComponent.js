@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import M from "materialize-css";
-import NewArrivals from "./NewArrivals";
-import CategoryList from "./CategoryList";
 import TextTrim from "react-text-trim";
+import CategoryNav from "./CategoryNav"
 const ProductComponent = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
@@ -41,8 +40,7 @@ const ProductComponent = () => {
   };
   return (
     <div>
-      <CategoryList />
-      <NewArrivals />
+      <CategoryNav/>
       <div className="container-fluid pt-4">
         <div className="d-flex flex-wrap justify-content-center">
           {products
