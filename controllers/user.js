@@ -14,9 +14,6 @@ const transporter = nodemailer.createTransport(
 );
 exports.signup = async (req, res) => {
   const { firstName, middleName, lastName, email, password, contactNumber } = req.body;
-  if (!email || !password) {
-    return res.json({ error: "Please add all credentials" });
-  }
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) {
     return res.json({ error: "user already registered" });
@@ -40,10 +37,7 @@ exports.signup = async (req, res) => {
 };
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    return res.json({ error: "Please add all credentials" });
-  }
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ email });
   if (user) {
     const passwordMatched = await bcrypt.compare(password, user.hash_password);
     if (passwordMatched) {
@@ -140,15 +134,16 @@ exports.googleLogin = async (req, res) => {
   }
 };
 exports.facebookLogin = async (req, res) => {
-  const { email, password, fullName, profilePicture } = req.body;
+  const { email, password, fullName, profilePic } = req.body;
   const userExist = await User.findOne({ email });
   if (!userExist) {
+    const hash_password = await bcrypt.hash(password, 12);
     const newUser = new User({
       email,
-      hash_password: password,
+      hash_password,
       username: Math.random().toString(),
       fullName,
-      profilePicture,
+      profilePic,
     });
     const user = await newUser.save();
     if (user) {

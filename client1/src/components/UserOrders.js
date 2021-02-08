@@ -28,7 +28,7 @@ const UserOrders = () => {
         {orders.length > 0
           ? orders.map((order, index) => {
               return (
-                <div key={index}>
+                <div key={index}>                
                   {order.cartItems.map((cartItem, index) => {
                     return (
                       <div className="p-2">

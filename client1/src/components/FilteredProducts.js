@@ -5,6 +5,8 @@ import axios from "axios";
 import M from "materialize-css";
 import CategoryList from "./CategoryNav";
 import TextTrim from "react-text-trim";
+import Zoom from 'react-reveal/Zoom';
+import CategoryNav from "./CategoryNav";
 const FilteredProducts = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
@@ -37,6 +39,8 @@ const FilteredProducts = () => {
   };
   return (
     <div>
+        <CategoryNav/>
+      <Zoom>
       <div className="container-fluid pt-4">
         <div className="d-flex flex-wrap justify-content-center">
           {filteredProducts
@@ -111,6 +115,7 @@ const FilteredProducts = () => {
             : "loading"}
         </div>
       </div>
+      </Zoom>
     </div>
   );
 };

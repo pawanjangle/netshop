@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import M from "materialize-css";
@@ -38,6 +39,34 @@ const NavbarComponent = () => {
             <li className="nav-item">
               <a>
                 <Link to="/userprofile">Hello, {user.firstName}</Link>
+              </a>
+            </li>
+            <li className="nav-item">
+              <a>
+                <Link className="" to="/admin/allproducts">
+                  Products
+                </Link>
+              </a>
+            </li>
+            <li className="nav-item">
+              <a>
+                <Link className="" to="/admin/allcategories">
+                  Category
+                </Link>
+              </a>
+            </li>
+            <li className="nav-item">
+              <a>
+                <Link className="" to="/userprofile">
+                  Profile
+                </Link>
+              </a>
+            </li>
+            <li className="nav-item">
+              <a>
+                <Link className="" to="/admin/receivedorders">
+                  Orders
+                </Link>
               </a>
             </li>
             <li className="nav-item">
@@ -117,7 +146,7 @@ const NavbarComponent = () => {
           <ul className="right hide-on-med-and-down">{renderList()}</ul>
         </div>
       </nav>
-   
+
       <ul className="sidenav text-center" id="mobile-demo">
         <div
           className="#4a148c purple darken-4 d-flex justify-content-center align-items-center mb-3"
@@ -128,13 +157,14 @@ const NavbarComponent = () => {
           </Link>
         </div>
         {renderList()}
-        <hr/>    
-      
-        {user.role !== "admin" ?   
-          (<><h6>Shop By Category</h6>      
-        <CategoryList/></>)
-        : null
-        }
+        <hr />
+
+        {user.role !== "admin" ? (
+          <>
+            <h6>Shop By Category</h6>
+            <CategoryList />
+          </>
+        ) : null}
       </ul>
     </div>
   );

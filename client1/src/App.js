@@ -97,6 +97,9 @@ const Routing = () => {
     axios.get("/product/getproducts").then((res) => {
       dispatch({ type: "ALL_PRODUCTS", payload: res.data.products });
     });
+      axios.get("/category/getcategory").then((res) => {
+        dispatch({ type: "GET_CATEGORIES", payload: res.data.categories })
+      });  
   }, []);
   return (
     <div>

@@ -5,17 +5,12 @@ import axios from "axios";
 import M from "materialize-css";
 import TextTrim from "react-text-trim";
 import CategoryNav from "./CategoryNav";
+import Flip from 'react-reveal/Flip';
 const ProductComponent = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const products = useSelector((state) => state.product.products);
   const token = useSelector((state) => state.auth.token);
-  useEffect(() => {
-    axios.get("/category/getcategory").then((res) => {
-      console.log(res);
-      dispatch({ type: "GET_CATEGORIES", payload: res.data.categories });
-    });
-  }, []);
   const addProductData = (id) => {
     axios
       .put(
@@ -41,6 +36,7 @@ const ProductComponent = () => {
   return (
     <div>
       <CategoryNav />
+      <Flip>
       <div className="container-fluid pt-4">
         <div className="d-flex flex-wrap justify-content-center">
           {products
@@ -118,6 +114,7 @@ const ProductComponent = () => {
             : "loading"}
         </div>
       </div>
+      </Flip>
     </div>
   );
 };
