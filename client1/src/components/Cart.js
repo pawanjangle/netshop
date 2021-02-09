@@ -12,7 +12,7 @@ const Cart = () => {
   const removeItemFromCart = (id) => {
     axios
       .put(
-        
+
         "/cart/removefromcart",
         { id },
         {
@@ -49,7 +49,7 @@ const Cart = () => {
                       <div className="d-flex flex-wrap">                      
                           <div className="col-md-3 d-flex flex-column  align-item-center">
                             <img
-                              className="img-fluid col-sm-6"
+                              className="img-fluid"
                               src={cartItem.product.productPicture}
                               alt=""                           
                             />                       
