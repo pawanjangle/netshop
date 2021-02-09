@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import M from "materialize-css";
 import axios from "axios";
 const NewPassword = () => {

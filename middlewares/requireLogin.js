@@ -4,10 +4,12 @@ const multer = require("multer");
 const multerS3 = require("multer-s3");
 const aws = require("aws-sdk");
 const shortid = require("shortid");
+const dotenv = require("dotenv");
+dotenv.config(); 
 const {check, validationResult } = require("express-validator");
 const s3 = new aws.S3({
-  secretAccessKey : "6NOUJdDgzcs340r96TGzS7D2sg3thAwVW2k5sGVs",
-  accessKeyId : "AKIAJTXN66QO6UKX55XQ"
+  secretAccessKey : process.env.secretAccessKey,
+  accessKeyId : process.env.accessKeyId
 }); 
 exports.requireLogin = async (req, res, next) => {
   const { authorization } = req.headers;

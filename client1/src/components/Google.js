@@ -8,7 +8,6 @@ const Google = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const responseGoogle = (res) => {
-    console.log(res)
     const data = {
       email: res.profileObj.email,
       firstName: res.profileObj.givenName,
@@ -27,8 +26,7 @@ axios.post("/user/googlelogin", data).then(res=>{
         headers: {
           Authorization: "bearer " + localStorage.getItem("token"),
         },
-      }).then((res) => {
-        console.log(res.data)
+      }).then((res) => {      
         dispatch({ type: "GET_CARTITEMS", payload: res.data });
       });
       dispatch({ type: "SIGNIN_USER", payload: {

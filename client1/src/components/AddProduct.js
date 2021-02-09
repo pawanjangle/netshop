@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import M from "materialize-css";
 const AddProduct = () => {
   const [productPicture, setProductPicture] = useState("");
@@ -10,7 +10,6 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const categories = useSelector((state) => state.category.categories);
-  const dispatch = useDispatch();
   const postProduct = () => {
     if (productPicture) {
       const form = new FormData();
@@ -20,7 +19,6 @@ const AddProduct = () => {
       form.append("price", price);
       form.append("category", selectCategory);
       form.append("productPicture", productPicture);
-      console.log(selectCategory);
       axios.post("/product/create", form).then((res) => {
         if (res.data.message) {
           M.toast({

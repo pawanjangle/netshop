@@ -1,17 +1,13 @@
-import React, { useEffect } from "react";
-import AdminNavbar from "./AdminNavbar";
-import axios from "axios";
+import React from "react";
 import Profile from "./Profile";
-import { useDispatch } from "react-redux";
-import Roll from 'react-reveal/Roll';
+import Roll from "react-reveal/Roll";
 const Dashboard = () => {
-  const dispatch = useDispatch();
   return (
-   <div>
-     <Roll> 
-     <Profile/>
-     </Roll> 
-     </div> 
+    <div>
+      <Roll>
+        <Profile />
+      </Roll>
+    </div>
   );
 };
 

@@ -73,8 +73,7 @@ const ProductDetails = () => {
                     />
                   </div>
                   <div>
-                  <button
-                    className="text-decoration-none"
+                  <button                   
                     className="btn waves-effect waves-light "
                     onClick={() => {
                       if (token) {

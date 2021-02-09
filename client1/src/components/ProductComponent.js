@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -87,8 +87,7 @@ const ProductComponent = () => {
                               />
                             </div>
                             <div className="text-center">
-                              <button
-                                className="text-decoration-none"
+                              <button                          
                                 className="btn waves-effect waves-light "
                                 onClick={() => {
                                   if (token) {

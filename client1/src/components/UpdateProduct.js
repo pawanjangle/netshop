@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {useParams} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {useParams, useHistory} from "react-router-dom";
+import { useSelector } from "react-redux";
 import M from "materialize-css";
 const UpdateProduct = () => {
+  const history = useHistory();
     const {id} = useParams();
   const [productPicture, setProductPicture] = useState("");
   const [product, setProduct] = useState("");
@@ -12,7 +13,6 @@ const UpdateProduct = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const categories = useSelector((state) => state.category.categories);
-  console.log(selectCategory)
   useEffect(() => {
     axios.get(`/product/getproduct/${id}`, {
       headers: {
@@ -28,7 +28,6 @@ const UpdateProduct = () => {
       setDescription(description)
     });
   }, []);
-  const dispatch = useDispatch();
   const updateProduct = () => {
     if (productPicture) {
       const form = new FormData();
@@ -43,8 +42,8 @@ const UpdateProduct = () => {
           Authorization: "bearer " + localStorage.getItem("token"),
         },
       }).then((res) => {
-        console.log(res)
         if (res.data.message) {
+          history.push("/admin/allproducts")
           M.toast({
             html: res.data.message,
             classes: "#00796b teal darken-2",

@@ -24,13 +24,11 @@ exports.getCategories = (req, res) => {
   });
 };
 exports.deleteCategory= async(req, res)=>{
-  console.log(req.params.id);
 Category.findOne({_id: req.params.id}).exec((err, category)=>{
  if(err || !category){
      return res.status(422).json({error : err})
  }
      category.remove().then(result=>{
-       console.log(result)
          return res.status(200).json({result, message: "category Deleted successfully"})
      }).catch(err=>{
          console.log(err)

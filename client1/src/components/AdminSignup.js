@@ -10,7 +10,6 @@ const AdminSignup = () => {
   const postData = () => {
     const data = { firstName, lastName, email, password };
     axios.post("/admin/signup", data).then((res) => {
-      console.log(res);
       if (res.data.message) {
         dispatch({ type: "SIGNUP_USER", payload: res });
       } else {

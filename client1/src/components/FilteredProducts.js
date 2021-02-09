@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import M from "materialize-css";
-import CategoryList from "./CategoryNav";
 import TextTrim from "react-text-trim";
 import Zoom from 'react-reveal/Zoom';
 import CategoryNav from "./CategoryNav";
@@ -88,8 +87,7 @@ const FilteredProducts = () => {
                               />
                             </div>
                             <div className="text-center">
-                              <button
-                                className="text-decoration-none"
+                              <button                        
                                 className="btn waves-effect waves-light "
                                 onClick={() => {
                                   if (token) {

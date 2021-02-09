@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import M from "materialize-css";
 import { useDispatch, useSelector } from "react-redux";
 import Checkout from "./Checkout";
 import TextTrim from "react-text-trim";
-import CategoryList from "./CategoryNav";
+import CategoryNav from "./CategoryNav";
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
-  console.log(cartItems);
   const dispatch = useDispatch();
   const removeItemFromCart = (id) => {
     axios
       .put(
+        
         "/cart/removefromcart",
         { id },
         {
@@ -35,27 +34,26 @@ const Cart = () => {
   };
   return (
     <div>
+      <CategoryNav />
       <div className="container-fluid d-flex flex-wrap mt-2">
         <div className="col-md-10 d-flex flex-column card">
           <h4 className="mb-3">Shopping Cart</h4>
           <div className="d-flex flex-column">
             {cartItems.length > 0
-              ? cartItems.map((cartItem) => {
+              ? cartItems.map((cartItem, index) => {
                   return (
-                    <div
+                    <div key={index}
                       className="card d-flex flex-column justify-content-center"
                       style={{ minHeight: "300px" }}
                     >
-                      <div className="d-flex flex-wrap">
-                        <div className="col-md-3 d-flex justify-content-center">
-                          <img
-                            className="col-sm-6"
-                            src={cartItem.product.productPicture}
-                            alt=""
-                            className="img-fluid"
-                            style={{ maxHeight: "250px" }}
-                          />
-                        </div>
+                      <div className="d-flex flex-wrap">                      
+                          <div className="col-md-3 d-flex flex-column  align-item-center">
+                            <img
+                              className="img-fluid col-sm-6"
+                              src={cartItem.product.productPicture}
+                              alt=""                           
+                            />                       
+                        </div>                    
                         <div className="col-md-6 d-flex flex-column">
                           <h5 className="">{cartItem.product.name}</h5>
                           <TextTrim

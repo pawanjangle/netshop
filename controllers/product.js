@@ -56,7 +56,6 @@ exports.updateProduct = async (req, res) => {
     }
 };
 exports.deleteProduct = async (req, res) => {
-  console.log(req.params.id);
   Product.findOne({ _id: req.params.id }).exec((err, product) => {
     if (err || !product) {
       return res.status(422).json({ error: err });

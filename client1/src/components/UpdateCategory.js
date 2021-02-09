@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import M from "materialize-css";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 const UpdateCategory = () => {
   const { id } = useParams();
   const [categoryPicture, setCategoryPicture] = useState("");
   const [categoryName, setName] = useState("");
+  const history = useHistory();
   useEffect(() => {
     axios
       .get(`/category/getcategory/${id}`, {
@@ -15,7 +15,6 @@ const UpdateCategory = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         setName(res.data.category.name);
         setCategoryPicture(res.data.category.categoryImage);
       });
@@ -33,6 +32,7 @@ const UpdateCategory = () => {
         })
         .then((res) => {
           if (res.data.message) {
+            history.push("/admin/allcategories")
             M.toast({
               html: res.data.message,
               classes: "#00796b teal darken-2",
@@ -51,7 +51,9 @@ const UpdateCategory = () => {
   return (
     <div className="continer-fluid d-flex justify-content-center mt-3">
       <div className="card col-md-6 py-4">
-      <h4 className="text-center text-danger font-weight-bold">UPDATE CATEGORY FORM</h4>
+        <h4 className="text-center text-danger font-weight-bold">
+          UPDATE CATEGORY FORM
+        </h4>
         <h5 className="text-center">Update Category</h5>
         <div className="form-group">
           <input
@@ -73,7 +75,7 @@ const UpdateCategory = () => {
             }}
           />
         </div>
-        <div className="text-center">    
+        <div className="text-center">
           <button
             type="button"
             className="btn btn-primary"

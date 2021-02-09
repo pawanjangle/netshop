@@ -9,7 +9,6 @@ const Facebook = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const responseFacebook = (res) => {
-    console.log(res)
     if(res.accessToken){
     const data = {
       email: res.email,

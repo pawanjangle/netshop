@@ -5,7 +5,6 @@ import TextTrim from "react-text-trim";
 const UserOrders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.order.orders);
-  console.log(orders);
   useEffect(() => {
     axios
       .get("/cart/userOrders", {

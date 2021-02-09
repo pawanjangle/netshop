@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "./App.css";
+import dotenv from "dotenv";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   useHistory,
-  Redirect,
 } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import AddProduct from "./components/AddProduct";
@@ -33,6 +33,7 @@ import UserOrders from "./components/UserOrders";
 import FilteredProducts from "./components/FilteredProducts";
 import ProductDetails from "./components/ProductDetails";
 const SecuredRoute = (props) => {
+  dotenv.config();
   const auth = useSelector((state) => state.auth.authenticated);
   return (
     <Route
@@ -51,10 +52,10 @@ const SecuredRoute = (props) => {
 const Routing = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  useEffect(async () => {
+  useEffect( () => {
     const token = localStorage.getItem("token");
     if (token) {
-      const verified = jwt.verify(token, "adgjmp100@");   
+      const verified = jwt.verify(token, process.env.REACT_APP_JwtSecret);   
       if (verified) {
         axios
           .get("/user/userprofile", {

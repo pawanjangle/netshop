@@ -2,7 +2,9 @@ const Cart = require("../models/cart");
 const {v4: uuidv4} = require("uuid");
 const Order = require("../Models/order");
 const Product = require("../models/product");
-const stripe = require('stripe')("sk_test_RM6s93kiQFW1hggt7lDQ1YHh00RpA9K1BC")
+const dotenv = require("dotenv");
+dotenv.config();
+const stripe = require('stripe')(process.env.stripeSKey)
 exports.addItemToCart = async (req, res) => {
   const { id, quantity} = req.body;
   const cartExist = await Cart.findOne({ user: req.user._id });
@@ -58,8 +60,7 @@ exports.addItemToCart = async (req, res) => {
   }
 };
 exports.removeItemFromCart = async (req, res) => {
-      const {id} = req.body;
-     
+      const {id} = req.body;    
     const cartItems = await Cart.findOneAndUpdate({user: req.user._id}, {$pull: { cartItems: {product: id }}},
       {new: true}).populate("cartItems.product");
     if(cartItems){
@@ -108,7 +109,6 @@ const order = await new Order({
   cartItems: cart.cartItems
 }).save();
 if(order){
-  console.log(order)
   const emaptyCart = await Cart.findOneAndUpdate({user: req.user._id},{ $set:{cartItems: []}}, {new: true});
   return res.status(200).json({message: "payment successful", charge, cartItems: emaptyCart, order})
 }
@@ -127,7 +127,6 @@ else{
 },{
     idempotencyKey: uuidv4()
 });
-console.log(cart.cartItems)
 const order =await new Order({
   user: req.user._id,
   email: paymentInfo.email,
@@ -141,9 +140,9 @@ return res.status(200).json({message: "payment successful", charge, cartItems: e
 }
 } 
 exports.ordersReceived = async (req, res)=>{
-  const orders = await Order.find().populate("cartItems.product").populate("user")
+  const orders = await Order.find().populate("cartItems.product").populate("user").sort({"createdAt": -1})
   if(orders){
-      return res.status(200).json({ data: orders})
+      return res.status(200).json({orders})
   }
   else{
       return res.json({error: "something went wrong"})
@@ -153,6 +152,16 @@ exports.userOrders = async (req, res)=>{
   const orders = await Order.find({user: req.user._id}).populate("cartItems.product")
   if(orders){
       return res.status(200).json({orders})
+  }
+  else{
+      return res.json({error: "something went wrong"})
+  }
+}
+exports.updateDelivery = async (req, res)=>{
+  const {delivery, id} = req.body;
+  const order = await Order.findOneAndUpdate({_id: id}, {deliveryStatus: delivery}, {new: true});
+  if(order){
+      return res.status(200).json({message: "delivery status updated", order})
   }
   else{
       return res.json({error: "something went wrong"})

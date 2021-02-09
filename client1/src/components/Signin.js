@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Facebook from "./Facebook";
 import Google from "./Google";
 import axios from "axios";
 import M from "materialize-css";
+import Slide from 'react-reveal/Slide';
 const Signin = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const postData = () => {
@@ -69,10 +69,12 @@ const Signin = () => {
     });
   };
   return (
-    <div className="container-fluid d-flex justify-content-center p-4">       
+    <div className="container-fluid d-flex justify-content-center p-4">
       <div className="card d-flex flex-column justify-content-center align-items-center col-md-8 flex-wrap py-4">
         <h4 className="text-center logo">NETSHOP</h4>
-        <h5 className="text-center font-weight-bold text-danger">SIGNIN FORM</h5>
+        <Slide right><h5 className="text-center font-weight-bold text-danger">
+          SIGNIN FORM
+        </h5>
         <div className="form-group col-md-8">
           <input
             type="email"
@@ -106,8 +108,8 @@ const Signin = () => {
           <Facebook />
           <Google />
         </div>
+        </Slide>
       </div>
-      
     </div>
   );
 };

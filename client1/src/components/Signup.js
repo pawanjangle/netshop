@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import M from "materialize-css";
 import {Link} from "react-router-dom"
+import Slide from 'react-reveal/Slide';
 const Signup = () => {
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
@@ -42,7 +43,7 @@ const Signup = () => {
     <div className="container-fluid d-flex justify-content-center p-4">
       <div className="card col-md-8">
       <h4 className="text-center logo">NETSHOP</h4>
-        <h5 className="text-center text-danger font-weight-bold">SIGNUP FORM</h5>
+        <Slide left><h5 className="text-center text-danger font-weight-bold">SIGNUP FORM</h5>
         <div className="d-flex justify-content-around flex-wrap">
           <div className="form-group col-md-4">
             <input
@@ -108,6 +109,7 @@ const Signup = () => {
         <h5 className="text-center">
           <Link to="/signin">Already have an Account ?</Link>
         </h5>
+       </Slide>
       </div>
     </div>
   );

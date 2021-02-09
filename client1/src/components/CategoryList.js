@@ -6,7 +6,6 @@ import Preloader from "./Preloader";
 const CategoryList = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
-  console.log(categories);
   const getProductsByCategory = (category) => {
     axios.post("/product/getproductsbycategory", { category }).then((res) => {
       dispatch({ type: "PRODUCTS_BY_CATEGORY", payload: res.data });

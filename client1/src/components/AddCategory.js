@@ -1,11 +1,9 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {useDispatch} from "react-redux"
 import M from "materialize-css";
 const AddCategory = () => {
   const [categoryPicture, setCategoryPicture] = useState("");
   const [categoryName, setName] = useState("");
- const dispatch = useDispatch()
   const postCategory = ()=>{
     if (categoryPicture) {
         const form = new FormData();

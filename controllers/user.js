@@ -3,12 +3,14 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const dotenv = require("dotenv");
+dotenv.config(); 
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        "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",
+        process.env.nodemail,
     },
   })
 );

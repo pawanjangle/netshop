@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import M from "materialize-css";
 import axios from "axios";
 const Reset = () => {
-  const history = useHistory();
   const [email, setEmail] = useState("");
   const postdata = () => {
     axios.post("/user/reset-password", { email }).then((res) => {

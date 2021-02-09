@@ -1,7 +1,5 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import M from "materialize-css";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
@@ -12,7 +10,6 @@ const NavbarComponent = () => {
     M.Sidenav.init(elems);
   });
   const dispatch = useDispatch();
-  const history = useHistory();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
@@ -83,15 +80,13 @@ const NavbarComponent = () => {
         return [
           <>
             <li className="collection-item avatar">
-              <Link to="/userprofile">
-                {" "}
+              <Link to="/userprofile">         
                 <img
-                  className="img-fluid"
+                  className="img-fluid circle"
                   src={user.profilePic}
                   style={{ height: "60px", width: "60px" }}
                   alt=""
-                  className="circle"
-                />{" "}
+                />
               </Link>
             </li>
             <li className="nav-item">

@@ -4,7 +4,6 @@ const initialState = {
   error: ""
 };
 const cartReducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case "ADD_TO_CART":
       return {
@@ -38,7 +37,6 @@ const cartReducer = (state = initialState, action) => {
         ...state,
       error: action.payload.error
       };
-
     default: {
       return state;
     }

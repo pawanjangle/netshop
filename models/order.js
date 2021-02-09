@@ -10,6 +10,7 @@ const orderSchema = new mongoose.Schema(
     total: {
       type: Number,
     },
+    deliveryStatus: { type: "String", default: "pending" },
     cartItems: [
       {
         product: {
@@ -18,13 +19,13 @@ const orderSchema = new mongoose.Schema(
           required: true,
         },
         quantity: Number,
-        total: Number
+        total: Number,
       },
     ],
-      
-      //   Items: []
-      // },
+
+    //   Items: []
+    // },
   },
   { timestamps: true }
-  );
+);
 module.exports = mongoose.model("Order", orderSchema);
