@@ -1,6 +1,6 @@
 const Cart = require("../models/cart");
 const {v4: uuidv4} = require("uuid");
-const Order = require("../Models/order");
+const Order = require("../models/order");
 const Product = require("../models/product");
 const dotenv = require("dotenv");
 dotenv.config();
