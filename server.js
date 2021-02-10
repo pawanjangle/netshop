@@ -30,8 +30,8 @@ app.use("/product", product);
 app.use("/category", category);
 app.use("/user", user);
 app.use("/admin", admin);
-// if (process.env.NODE_ENV === 'production') {
-// Serve any static files
+if (process.env.NODE_ENV === 'production') {
+Serve any static files
 app.use(express.static(path.join(__dirname, "client1/build")));
 // Handle React routing, return all requests to React app
 app.get("/", function (req, res) {
