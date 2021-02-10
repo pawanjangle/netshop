@@ -38,7 +38,7 @@ app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "client1/build", "index.html"));
 });
 //   }
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log("express server is runnning on port " + port);
 });

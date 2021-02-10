@@ -32,8 +32,8 @@ import UserProfile from "./components/UserProfile";
 import UserOrders from "./components/UserOrders";
 import FilteredProducts from "./components/FilteredProducts";
 import ProductDetails from "./components/ProductDetails";
-const SecuredRoute = (props) => {
-  dotenv.config();
+dotenv.config();
+const SecuredRoute = (props) => { 
   const auth = useSelector((state) => state.auth.authenticated);
   return (
     <Route
