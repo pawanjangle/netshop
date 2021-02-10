@@ -35,16 +35,7 @@ axios.post("/user/googlelogin", data).then(res=>{
         message: res.data.message,
       }});
       M.toast({html: res.data.message, classes:"#00796b teal darken-2", displayLength: 1000  })
-    }
-    else{
-      dispatch({ type: "SIGNIN_USER", payload: {
-        user: res.data.user,
-        token: res.data.token,
-        message: res.data.message,           
-      }});
-      M.toast({html: res.data.message, classes: "#00796b teal darken-2", displayLength: 1000  })
-      history.push("/admin")
-    }          
+    }        
   }
   else{
     M.toast({html: res.data.error, classes: "#f50057 pink accent-3", displayLength: 1000  })
