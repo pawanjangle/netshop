@@ -84,11 +84,11 @@ const AdminOrder = () => {
         Order History
       </h4>
       <ul className="collapsible" ref={orderRef}>
-        {orders
+        {orders.length > 0
           ? orders.map((order, index) => {
               return (
-                <li key={index}>
-                  <div className="collapsible-header d-flex align-items-center">
+                <li key={index}>                       
+                  <div className="collapsible-header d-flex">
                     <i className="material-icons  mr-4">history</i>
                     <h6 className="font-weight-bold mr-4">{index + 1} </h6>{" "}
                     <h6 className="font-weight-bold">
@@ -96,6 +96,7 @@ const AdminOrder = () => {
                     </h6>
                   </div>
                   <div className="collapsible-body">
+                  <div className="d-flex flex-column justify-content-start">   
                     <span className="font-weight-bold ">Ordered By:</span>{" "}
                     <span> {order.user.fullName}</span>
                     <br />
@@ -105,26 +106,30 @@ const AdminOrder = () => {
                       return (
                         <div
                           key={index}
-                          className="d-flex justify-content-between"
+                          className="d-flex justify-content-start flex-wrap"
                         >
+                          <div className="col-sm-9">
                           <li>
-                            <Link to={`/productdetails/${item.product._id}`}>
+                           {index + 1}. <Link to={`/productdetails/${item.product._id}`}>
                               {item.product.name}
                             </Link>
                           </li>
+                          </div>
+                          <div className="col-sm-3">
                           <h6 className="font-weight-bold">
                             Price: ₹ {item.product.price} X {item.quantity} = ₹
                             {item.total}
                           </h6>
+                          </div>
                         </div>
                       );
                     })}
                     <h6 className="font-weight-bold">Delivery Status: {order.deliveryStatus}</h6>
-                    <div className="d-flex justify-content-between align-items-center">                   
-                        <div className="form-group">
+                    <div className="d-flex justify-content-center align-items-center flex-wrap">                   
+                        <div className="form-group col-sm-9">
                         <label>Set Delivery Status :</label>
                           <select
-                            className="form-control"
+                            className="form-control" style={{width: "auto"}}
                             onClick={(e) => {
                               setOrderId(order._id);
                               setDelivery(e.target.value);
@@ -134,13 +139,14 @@ const AdminOrder = () => {
                             <option>Delivered</option>
                           </select>                    
                       </div>
-                      <div>
+                      <div className="col-sm-3 d-flex justify-content-">
                         <h6 className="font-weight-bold">
                           Total Price : ₹ {order.total}
                         </h6>
                       </div>
                     </div>
-                  </div>
+                  </div>  
+                  </div>            
                 </li>
               );
             })

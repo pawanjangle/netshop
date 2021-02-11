@@ -8,8 +8,7 @@
 /coverage
 .env
 # production
-# /build
-.env
+/build
 # misc
 .DS_Store
 .env.development.local

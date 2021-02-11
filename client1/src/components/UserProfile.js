@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import M from "materialize-css";
+import Zoom from 'react-reveal/Zoom';
 const UserProfile = () => {
   const dispatch = useDispatch();
   const [image, setImage] = useState("");
   const [mob, setMob] = useState("");
   const user = useSelector((state) => state.auth.user);
+  console.log(user)
   useEffect(() => {
     if (image) {
       const form = new FormData();
@@ -64,12 +66,12 @@ const UserProfile = () => {
       <div className="card py-3">
       <div className="d-flex">
         <div className="d-flex flex-column justify-content-center col-md-6 align-items-center">
-          <img
+         <Zoom><img
             className="img-fluid"
             src={user.profilePic}
             alt=""
             style={{ maxHeight: "200px" }}
-          />
+          /></Zoom> 
           <div className="file-field input-field">
             <div className="btn">
               <span>set Profile Picture</span>
@@ -85,7 +87,7 @@ const UserProfile = () => {
         </div>
         <div className="d-flex flex-column col-md-6 justify-content-center">
           <h6>Name:</h6>
-        {user.fullName ? <p>{user.fullName}</p> : <p>{user.firstName} {user.middleName} {user.lastName}</p>}
+        {(user.middleName === null) ? <p>{user.fullName}</p> : <p>{user.firstName} {user.middleName} {user.lastName}</p>}
          <h6>Email:</h6> <p> {user.email}</p>
          <h6>Mob. No:</h6>
          {user.contactNumber ? (<div><p>{user.contactNumber}</p> 

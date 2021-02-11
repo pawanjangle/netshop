@@ -137,10 +137,15 @@ exports.googleLogin = async (req, res) => {
 };
 exports.facebookLogin = async (req, res) => {
   const { email, password, fullName, profilePic } = req.body;
+  const splitFullName = fullName.split(" ");
+  const firstName = splitFullName[0];
+  const lastName = splitFullName[1];
   const userExist = await User.findOne({ email });
   if (!userExist) {
     const hash_password = await bcrypt.hash(password, 12);
     const newUser = new User({
+      firstName,
+      lastName,
       email,
       hash_password,
       username: Math.random().toString(),

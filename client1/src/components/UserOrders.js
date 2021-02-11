@@ -4,7 +4,7 @@ import axios from "axios";
 import TextTrim from "react-text-trim";
 const UserOrders = () => {
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.order.orders);
+  const orders = useSelector((state) => state.order.userOrders);
   useEffect(() => {
     axios
       .get("/cart/userOrders", {
@@ -61,13 +61,14 @@ const UserOrders = () => {
                           <div className="col-md-3 d-flex justify-content-center">
                             <b> price :</b> ₹ {cartItem.product.price} x{" "}
                             {cartItem.quantity} =<b>₹ {cartItem.total}</b>
-                          </div>
-                        </div>
+                          </div>                
+                        </div>                    
                       </div>
                     );
                   })}
-                  <div className="d-flex justify-content-center align-items-center">
+                  <div className="d-flex flex-column justify-content-center align-items-center">
                     <b>Total Price: ₹{order.total}</b>
+                    <span className="font-weight-bold text-center">Delivery Status : {order.deliveryStatus}</span>
                   </div>
 
                   <hr />

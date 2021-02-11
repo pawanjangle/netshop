@@ -13,6 +13,7 @@ const NavbarComponent = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+  console.log(user)
   const signout = () => {
     localStorage.clear();
     dispatch({ type: "SIGNOUT_USER", payload: "logout successfully" });
@@ -21,21 +22,20 @@ const NavbarComponent = () => {
     if (token) {
       if (user.role === "admin") {
         return [
-          <>
-            <li class="collection-item avatar">
-              <Link to="/userprofile">
-                {" "}
+          <>               
+            <li className="nav-item" >
+              <Link to="/userprofile">          
                 <img
                   className="img-fluid circle"
-                  src={user.profilePic}
-                  style={{ height: "60px", width: "60px" }}
-                  alt=""
-                />{" "}
+                  src={user.profilePic}              
+                  alt=""      
+                  style ={{height: "50px", width: "50px"}}         
+                />
               </Link>
             </li>
             <li className="nav-item">
               <a>
-                <Link to="/userprofile">Hello, {user.firstName}</Link>
+                <Link to="/userprofile">Hello, {user.fullName}</Link>
               </a>
             </li>
             <li className="nav-item">
@@ -51,14 +51,7 @@ const NavbarComponent = () => {
                   Category
                 </Link>
               </a>
-            </li>
-            <li className="nav-item">
-              <a>
-                <Link className="" to="/userprofile">
-                  Profile
-                </Link>
-              </a>
-            </li>
+            </li>           
             <li className="nav-item">
               <a>
                 <Link className="" to="/admin/receivedorders">
@@ -72,7 +65,7 @@ const NavbarComponent = () => {
                   Logout
                 </Link>
               </a>
-            </li>
+            </li>         
           </>,
         ];
       }
@@ -83,8 +76,8 @@ const NavbarComponent = () => {
               <Link to="/userprofile">         
                 <img
                   className="img-fluid circle"
-                  src={user.profilePic}
-                  style={{ height: "60px", width: "60px" }}
+                  src={user.profilePic}  
+                  style ={{height: "50px", width: "50px"}}              
                   alt=""
                 />
               </Link>
@@ -92,7 +85,7 @@ const NavbarComponent = () => {
             <li className="nav-item">
               <a>
                 <Link className="" to="/profile">
-                  Hello, {user.firstName}
+                  Hello, {user.fullName}
                 </Link>
               </a>
             </li>
@@ -142,16 +135,15 @@ const NavbarComponent = () => {
         </div>
       </nav>
 
-      <ul className="sidenav text-center" id="mobile-demo">
+      <ul className="sidenav text-center flex-wrap" id="mobile-demo">
         <div
-          className="#4a148c purple darken-4 d-flex justify-content-center align-items-center mb-3"
-          style={{ height: "60px" }}
+          className="navbar-brand logo #4a148c purple darken-4 d-flex justify-content-center align-items-center text-white mb-3"  style={{width: "100%", height: "90px"}}       
         >
           <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
             NETSHOP
           </Link>
         </div>
-        {renderList()}
+       <ul className="collection"> {renderList()}</ul>
         <hr />
 
         {user.role !== "admin" ? (

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Preloader from "./Preloader";
+import Slide from 'react-reveal/Slide';
 const CategoryNav = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
@@ -14,12 +15,13 @@ const CategoryNav = () => {
   return (
     <div>
       <nav className="hide-on-med-and-down">
-        <div class="nav-wrapper #d500f9 purple accent-3">
-          <ul className="left">
+        <div class="nav-wrapper #651fff deep-purple accent-3">
+          <ul className="">
             {categories ? (
               categories.map((category, index) => {
                 return (
                   <>
+                  <Slide right>
                     <li
                       className="nav-item"
                       onClick={() => {
@@ -28,6 +30,7 @@ const CategoryNav = () => {
                     >
                       <Link to="/filteredproducts">{category.name}</Link>
                     </li>
+                    </Slide>
                   </>
                 );
               })

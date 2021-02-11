@@ -1,6 +1,7 @@
 const initialState = {
   orders: [],
   error: "",
+  userOrders: []
 };
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -9,6 +10,11 @@ const orderReducer = (state = initialState, action) => {
         ...state,
         orders: action.payload.orders,
       };
+      case "GET_ORDERS":
+        return {
+          ...state,
+          userOrders: action.payload.orders,
+        };
     default: {
       return state;
     }

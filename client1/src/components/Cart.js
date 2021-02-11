@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Checkout from "./Checkout";
 import TextTrim from "react-text-trim";
 import CategoryNav from "./CategoryNav";
+import Fade from 'react-reveal/Fade';
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
@@ -38,6 +39,7 @@ const Cart = () => {
       <div className="container-fluid d-flex flex-wrap mt-2">
         <div className="col-md-10 d-flex flex-column card">
           <h4 className="mb-3">Shopping Cart</h4>
+          <Fade>
           <div className="d-flex flex-column">
             {cartItems.length > 0
               ? cartItems.map((cartItem, index) => {
@@ -94,6 +96,7 @@ const Cart = () => {
                 })
               : "There is no Item in cart"}
           </div>
+          </Fade>
         </div>
         <div className="col-md-2 card d-flex flex-column align-items-center">
           <h6>Subtotal ( {cartItems ? cartItems.length : "0"} items) : </h6>

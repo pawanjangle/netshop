@@ -9,6 +9,7 @@ const Facebook = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const responseFacebook = (res) => {
+    console.log(res)
     if(res.accessToken){
     const data = {
       email: res.email,
@@ -58,16 +59,12 @@ const Facebook = () => {
       ); 
     }
   };
-  const componentClicked = (data) => {
-    console.log(data);
-  };
   return (
     <div className="col-md-6 text-center">
       <FacebookLogin
         appId="238221754592990"
         autoLoad={true}
         fields="name,email,picture"
-        onClick={componentClicked}
         callback={responseFacebook}
         size= "small"      
       />
