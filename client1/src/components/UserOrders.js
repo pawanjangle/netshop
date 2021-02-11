@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import TextTrim from "react-text-trim";
+import Fade from 'react-reveal/Fade';
 const UserOrders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.order.userOrders);
@@ -30,6 +31,7 @@ const UserOrders = () => {
                 <div key={index}>                
                   {order.cartItems.map((cartItem, index) => {
                     return (
+                     <Fade>
                       <div className="p-2">
                         <div className="d-flex flex-wrap">
                           <div className="col-md-2 d-flex justify-content-center">
@@ -64,6 +66,7 @@ const UserOrders = () => {
                           </div>                
                         </div>                    
                       </div>
+                      </Fade>
                     );
                   })}
                   <div className="d-flex flex-column justify-content-center align-items-center">
@@ -71,8 +74,9 @@ const UserOrders = () => {
                     <span className="font-weight-bold text-center">Delivery Status : {order.deliveryStatus}</span>
                   </div>
 
-                  <hr />
+                  <hr />                
                 </div>
+                
               );
             })
           : "No previous Orders"}

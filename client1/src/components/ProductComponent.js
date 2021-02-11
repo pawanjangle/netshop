@@ -5,7 +5,7 @@ import axios from "axios";
 import M from "materialize-css";
 import TextTrim from "react-text-trim";
 import CategoryNav from "./CategoryNav";
-import Flip from 'react-reveal/Flip';
+import Rotate from 'react-reveal/Rotate';
 const ProductComponent = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
@@ -36,7 +36,7 @@ const ProductComponent = () => {
   return (
     <div>
       <CategoryNav />
-      <Flip>
+   
       <div className="container-fluid pt-4">
         <div className="d-flex flex-wrap justify-content-center">
           {products
@@ -51,15 +51,18 @@ const ProductComponent = () => {
                             style={{ minHeight: "250px" }}
                             className="d-flex justify-content-center align-items-center"
                           >
+                            <Rotate>
                             <img
                               className="card-img-top img-fluid col-sm-6 col-md-6"
                               src={product.productPicture}
                               alt=""
                               style={{ width: "80%" }}
                             />
+                            </Rotate>
                           </div>
                         </Link>
                         <div className="card-body text-center">
+                          <div style = {{ minHeight: "30px"}}>
                           <TextTrim
                             refId="TextTrim"
                             text={product.name}
@@ -73,6 +76,7 @@ const ProductComponent = () => {
                             textWrapperStyle={{}}
                             buttonStyle={{}}
                           />
+                          </div>
                           <h6>₹ {product.price}</h6>
                           <div className="d-flex justify-content-around align-items-center">
                             <div className="form-group">
@@ -113,7 +117,6 @@ const ProductComponent = () => {
             : "loading"}
         </div>
       </div>
-      </Flip>
     </div>
   );
 };
