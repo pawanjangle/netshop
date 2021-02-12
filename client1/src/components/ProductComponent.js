@@ -6,6 +6,7 @@ import M from "materialize-css";
 import TextTrim from "react-text-trim";
 import CategoryNav from "./CategoryNav";
 import Rotate from 'react-reveal/Rotate';
+import Preloader from "./Preloader";
 const ProductComponent = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
@@ -35,18 +36,16 @@ const ProductComponent = () => {
   };
   return (
     <div>
-      <CategoryNav />
-   
+      <CategoryNav /> 
       <div className="container-fluid pt-4">
         <div className="d-flex flex-wrap justify-content-center">
           {products
-            ? products.map((product, index) => {
+            ? products.map((product) => {
                 return (
                   <>
                     <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
-                      <div className="card mr-3" key={index}>
-                        <Link to={`/productdetails/${product._id}`}>
-                          {" "}
+                      <div className="card mr-3" >
+                        <Link to={`/productdetails/${product._id}`}>                     
                           <div
                             style={{ minHeight: "250px" }}
                             className="d-flex justify-content-center align-items-center"
@@ -114,9 +113,9 @@ const ProductComponent = () => {
                   </>
                 );
               })
-            : "loading"}
+            :  <Preloader/>}
         </div>
-      </div>
+      </div>   
     </div>
   );
 };

@@ -20,9 +20,9 @@ const CategoryNav = () => {
             {categories ? (
               categories.map((category, index) => {
                 return (
-                  <>
+                  <div key={index}>
                   <Slide right>
-                    <li
+                    <li 
                       className="nav-item"
                       onClick={() => {
                         getProductsByCategory(category.name);
@@ -31,7 +31,7 @@ const CategoryNav = () => {
                       <Link to="/filteredproducts">{category.name}</Link>
                     </li>
                     </Slide>
-                  </>
+                  </div>
                 );
               })
             ) : (

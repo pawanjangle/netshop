@@ -19,6 +19,7 @@ const Checkout = () => {
         }
       )
       .then((res) => {
+        console.log(res)
         if (res.data.message) {
           dispatch({ type: "CHECKOUT", payload: res.data });
           M.toast({
@@ -37,20 +38,19 @@ const Checkout = () => {
         }
       });
   };
-  const stripekey = process.env.REACT_APP_stripePKey;
   return (
     <div>
       <StripeCheckout
         name="Netshop"
         token={(paymentInfo) => handleCheckout(paymentInfo)}
-        stripeKey={stripekey}
+        stripeKey={process.env.REACT_APP_stripePKey}
         amount={cartTotal * 100}
         currency="INR"
         image={
           cartItems.length > 0 ? cartItems[0].product.productPicture : "Loading"
-        }
-        shippingAddress={true}
+        } 
         billingAddress={true}
+        allowRememberMe= {false}
       />
     </div>
   );

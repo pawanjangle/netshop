@@ -13,7 +13,6 @@ const NavbarComponent = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
-  console.log(user)
   const signout = () => {
     localStorage.clear();
     dispatch({ type: "SIGNOUT_USER", payload: "logout successfully" });

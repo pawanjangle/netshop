@@ -8,7 +8,6 @@ const UserProfile = () => {
   const [image, setImage] = useState("");
   const [mob, setMob] = useState("");
   const user = useSelector((state) => state.auth.user);
-  console.log(user)
   useEffect(() => {
     if (image) {
       const form = new FormData();

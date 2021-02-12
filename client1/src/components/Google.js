@@ -7,7 +7,7 @@ import axios from "axios";
 const Google = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const responseGoogle = (res) => {
+  const responseGoogle = (res) => { 
     const data = {
       email: res.profileObj.email,
       firstName: res.profileObj.givenName,
@@ -46,8 +46,8 @@ axios.post("/user/googlelogin", data).then(res=>{
   };
   return (
     <div className="col-md-6 text-center">
-      <GoogleLogin
-        clientId="656155426164-p6dqate1336u6bh58nif35jedt5ikbpg.apps.googleusercontent.com"
+      <GoogleLogin      
+        clientId = {process.env.REACT_APP_googleClientId}    
         buttonText="Login"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}

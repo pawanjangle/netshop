@@ -9,7 +9,6 @@ const Facebook = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const responseFacebook = (res) => {
-    console.log(res)
     if(res.accessToken){
     const data = {
       email: res.email,
@@ -62,8 +61,8 @@ const Facebook = () => {
   return (
     <div className="col-md-6 text-center">
       <FacebookLogin
-        appId="238221754592990"
-        autoLoad={true}
+        appId= {process.env.REACT_APP_facebookClientId}
+        autoLoad={false}
         fields="name,email,picture"
         callback={responseFacebook}
         size= "small"      

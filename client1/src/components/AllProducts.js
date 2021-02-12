@@ -62,15 +62,15 @@ const AllProducts = () => {
                   <>
                     <tr key={index}>
                       <th scope="row">{index + 1}</th>
-                      <td>{product.name}</td>
+                    <Link to={`/productdetails/${product._id}`}> <td className="text-white">{product.name}</td></Link>
                       <td>
                         <img
                           src={product.productPicture}
                           alt=""
                           style={{ height: "50px" }}
                         />
-                      </td>
-                      <td>
+                      </td>                     
+                      <td>                       
                       <div className="d-flex justify-content-between flex-wrap">
                         <Link to={`/admin/updateproduct/${product._id}`}>                                          
                           <button
