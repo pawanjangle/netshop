@@ -7,7 +7,7 @@
 # testing
 /coverage
 .env
-eslintcache
+.eslintcache
 # production
 /build
 # misc
