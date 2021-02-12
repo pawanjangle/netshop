@@ -18,7 +18,7 @@ const CategoryList = () => {
                 return (
                   <ul className="text-center">
                     <li
-                      className="nav-item"
+                      className="nav-item sidenav-close"
                       onClick={() => {
                         getProductsByCategory(category.name);
                       }}

@@ -23,7 +23,7 @@ const NavbarComponent = () => {
       if (user.role === "admin") {
         return [
           <>               
-            <li className="nav-item" >
+            <li className="nav-item sidenav-close" >
               <Link to="/userprofile">          
                 <img
                   className="img-fluid circle"
@@ -33,33 +33,33 @@ const NavbarComponent = () => {
                 />
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item sidenav-close">
               <a>
                 <Link to="/userprofile">Hello, {user.fullName}</Link>
               </a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item sidenav-close">
               <a>
                 <Link className="" to="/admin/allproducts">
                   Products
                 </Link>
               </a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item sidenav-close">
               <a>
                 <Link className="" to="/admin/allcategories">
                   Category
                 </Link>
               </a>
             </li>           
-            <li className="nav-item">
+            <li className="nav-item sidenav-close">
               <a>
                 <Link className="" to="/admin/receivedorders">
                   Orders
                 </Link>
               </a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item sidenav-close">
               <a>
                 <Link className="" to="/signin" onClick={() => signout()}>
                   Logout
@@ -72,7 +72,7 @@ const NavbarComponent = () => {
       if (user.role === "user") {
         return [
           <>
-            <li className="collection-item avatar">
+            <li className="collection-item avatar sidenav-close">
               <Link to="/userprofile">         
                 <img
                   className="img-fluid circle"
@@ -82,14 +82,14 @@ const NavbarComponent = () => {
                 />
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item sidenav-close">
               <a>
                 <Link className="" to="/profile">
                   Hello, {user.fullName}
                 </Link>
               </a>
             </li>
-            <li className="nav-item active">
+            <li className="nav-item active sidenav-close">
               <a>
                 <Link className="" to="/cart">
                   <ShoppingCartOutlinedIcon />
@@ -98,7 +98,7 @@ const NavbarComponent = () => {
                 <span className="sr-only">(current)</span>
               </a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item sidenav-close">
               <a>
                 <Link to="/signin" onClick={() => signout()}>
                   Logout
@@ -111,10 +111,10 @@ const NavbarComponent = () => {
     } else {
       return [
         <>
-          <li className="nav-item">
+          <li className="nav-item sidenav-close">
             <Link to="/signin">Signin</Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item sidenav-close">
             <Link to="/signup">Signup</Link>
           </li>
         </>,
@@ -128,14 +128,14 @@ const NavbarComponent = () => {
           <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
             <a className="brand-logo logo"> NETSHOP</a>
           </Link>
-          <Link to="#" data-target="mobile-demo" className="sidenav-trigger">
+          <Link to="#" data-target="mobile-demo slide-out" className="sidenav-trigger">
             <i className="material-icons">menu</i>
           </Link>
           <ul className="right hide-on-med-and-down">{renderList()}</ul>
         </div>
       </nav>
 
-      <ul className="sidenav text-center flex-wrap" id="mobile-demo">
+      <ul className="sidenav text-center flex-wrap" id="mobile-demo slide-out">
         <div
           className="navbar-brand logo #4a148c purple darken-4 d-flex justify-content-center align-items-center text-white mb-3"  style={{width: "100%", height: "90px"}}       
         >
@@ -143,9 +143,8 @@ const NavbarComponent = () => {
             NETSHOP
           </Link>
         </div>
-       <ul className="collection"> {renderList()}</ul>
+        {renderList()}
         <hr />
-
         {user.role !== "admin" ? (
           <>
             <h6>Shop By Category</h6>
