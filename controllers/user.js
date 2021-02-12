@@ -76,7 +76,7 @@ exports.reset = (req, res) => {
             to: result.email,
             from: "pawandjangle@outlook.com",
             subject: "password reset",
-            html: `<p>You requested for password</p> <h5>click this <a href = "http://localhost:3000/reset/${token}">link </a> to reset</h5>`,
+            html: `<p>You requested for password</p> <h5>click this <a href = "http://netshopecommerce.herokuapp.com/reset/${token}">link </a> to reset</h5>`,
           });
           res.json({ message: "check your email inbox" });
         })

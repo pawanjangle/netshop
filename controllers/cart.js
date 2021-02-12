@@ -106,7 +106,9 @@ const order = await new Order({
   user: req.user._id,
   email: paymentInfo.email,
   total: price * 100,
-  cartItems: cart.cartItems
+  cartItems: cart.cartItems,
+  billingAddress : charge.billing_details.address,
+  paymentDetails: charge.payment_method_details.card
 }).save();
 if(order){
   const emaptyCart = await Cart.findOneAndUpdate({user: req.user._id},{ $set:{cartItems: []}}, {new: true});
@@ -131,11 +133,13 @@ const order =await new Order({
   user: req.user._id,
   email: paymentInfo.email,
   total : price,
-  cartItems: cart.cartItems
+  cartItems: cart.cartItems,
+  billingAddress : charge.billing_details.address,
+  paymentDetails: charge.payment_method_details.card
 }).save();
 if(order){
   const emaptyCart =  await Cart.findOneAndUpdate({user: req.user._id},{ $set:{cartItems: []}}, {new: true});
-return res.status(200).json({message: "payment successful", charge, cartItems: emaptyCart, order })
+return res.status(200).json({message: "payment successful", cartItems: emaptyCart, order })
 }
 }
 } 

@@ -6,10 +6,10 @@
 .pnp.js
 # testing
 /coverage
-
-.eslintcache
+.eslintcache        
 # production
 /build
+.env.local
 # misc
 .DS_Store
 .env.development.local

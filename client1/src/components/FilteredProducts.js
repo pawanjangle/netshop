@@ -6,6 +6,7 @@ import M from "materialize-css";
 import TextTrim from "react-text-trim";
 import Zoom from "react-reveal/Zoom";
 import CategoryNav from "./CategoryNav";
+import Preloader from "./Preloader";
 const FilteredProducts = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
@@ -13,7 +14,6 @@ const FilteredProducts = () => {
   const filteredProducts = useSelector(
     (state) => state.product.filteredProducts
   );
-  console.log(filteredProducts);
   const addProductData = (id) => {
     axios
       .put(
@@ -46,7 +46,7 @@ const FilteredProducts = () => {
               ? filteredProducts.map((product) => {
                   return (
                     <>
-                      <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
+                      <div className="col-sm-6 col-md-4 col-lg-3 mb-3" >
                         <div className="card mr-3">
                           <Link to={`/productdetails/${product._id}`}>                 
                             <div
@@ -112,7 +112,7 @@ const FilteredProducts = () => {
                     </>
                   );
                 })
-              : "loading"}
+              : <Preloader/>}
           </div>
         </div>
       </Zoom>

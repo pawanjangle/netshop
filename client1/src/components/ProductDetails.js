@@ -43,7 +43,7 @@ const ProductDetails = () => {
   };
   return (
     <div>
-        <CategoryNav/>
+       {user ? user.role === "admin" ? null : <CategoryNav/>:<CategoryNav/>}
         <Bounce>
       <div className="container-fluid">
         <div className="card p-3">

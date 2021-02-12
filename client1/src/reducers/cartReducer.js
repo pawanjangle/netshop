@@ -29,7 +29,6 @@ const cartReducer = (state = initialState, action) => {
         paymentMessage: action.payload.message,
         cartItems: action.payload.cartItems,
         cartTotal: 0,
-        paymentDetails: action.payload.charge.billing_details
       };
       
     case "CHECKOUT_ERROR":

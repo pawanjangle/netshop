@@ -16,7 +16,7 @@ const CategoryList = () => {
             {categories ? (
               categories.map((category, index) => {
                 return (
-                  <ul className="text-center">
+                  <ul className="text-center" key={index}>
                     <li
                       className="nav-item sidenav-close"
                       onClick={() => {

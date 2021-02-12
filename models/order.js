@@ -11,6 +11,16 @@ const orderSchema = new mongoose.Schema(
       type: Number,
     },
     deliveryStatus: { type: "String", default: "pending" },
+    billingAddress: { 
+      city: String,
+      country: String,
+      postal_code: Number,
+      line1: String
+    },
+    paymentDetails:{      
+      brand: String,
+      last4: Number
+      },
     cartItems: [
       {
         product: {
@@ -22,9 +32,6 @@ const orderSchema = new mongoose.Schema(
         total: Number,
       },
     ],
-
-    //   Items: []
-    // },
   },
   { timestamps: true }
 );

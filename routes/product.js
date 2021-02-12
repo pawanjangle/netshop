@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const { requireLogin, adminMiddleware, userMiddleware, uploadS3} = require("../middlewares/requireLogin");
+const { requireLogin, uploadS3} = require("../middlewares/requireLogin");
 const { createProduct, getProducts, updateProduct, deleteProduct, getProduct, getProductsByCategory, productDetails } = require("../controllers/product");
 router.post("/create", uploadS3.single("productPicture"), createProduct);
 router.get("/getproducts", getProducts);

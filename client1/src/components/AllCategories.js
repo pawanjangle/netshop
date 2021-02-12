@@ -61,7 +61,7 @@ const AllCategories = () => {
               <>
                 <tr>
                   <th scope="row">{index + 1}</th>
-                  <td>{category.name}</td>
+                  <td className="text-white">{category.name}</td>
                   <td>
                     <img
                       src={category.categoryImage}
