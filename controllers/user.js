@@ -191,7 +191,7 @@ exports.updateMob = async (req, res)=>{
   const {mob} = req.body;
   const user = await User.findByIdAndUpdate(req.user._id, {contactNumber: mob}, {new: true});
   if(user){
-    return res.status(200).json({user, message: "Mob No. updated successfully"})
+    return res.status(200).json({user, message: "Mob No. updated successfully"});
   }
   else{
     return res.json({error: "failed to update Mobile No."})
