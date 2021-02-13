@@ -13,7 +13,7 @@ const cart = require("./routes/cart");
 //envioronment variables
 env.config();
 mongoose
-  .connect(process.env.mongoUri, {
+  .connect("mongodb+srv://pawanjangle:adgjmp100@cluster0.yculf.mongodb.net/Netshop?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
