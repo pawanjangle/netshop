@@ -49,7 +49,7 @@ const AdminSignup = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="Enter Middle Name"
+            placeholder="Enter Middle Name(optional)"
             onChange={(e) => setMiddleName(e.target.value)}
           />
         </div>
