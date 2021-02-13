@@ -29,6 +29,7 @@ exports.signup = async (req, res) => {
     email,
     hash_password,
     username: Math.random().toString(),
+    fullName: `${firstName} ${middleName} ${lastName}`
   });
   const user = await _user.save();
   if (!user) {

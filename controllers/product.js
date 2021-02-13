@@ -28,7 +28,7 @@ exports.createProduct = async (req, res) => {
   }
 };
 exports.getProducts = async (req, res) => {
-  const products = await Product.find();
+  const products = await Product.find().sort({"createdAt": -1});
   if (products) {
     return res.status(200).json({ products });
   }
@@ -83,7 +83,7 @@ exports.getProduct = async (req, res) => {
 };
 exports.getProductsByCategory = async (req, res)=>{
   const {category} = req.body;
-const products = await Product.find({category}).sort({price: 1})
+const products = await Product.find({category}).sort({"price": 1})
 if(products){
   res.status(200).json({products})
 }

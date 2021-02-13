@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {  useSelector } from "react-redux";
+import {  useSelector, useDispatch } from "react-redux";
 import M from "materialize-css";
 const AddProduct = () => {
   const [productPicture, setProductPicture] = useState("");
@@ -10,6 +10,12 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const categories = useSelector((state) => state.category.categories);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    axios.get("/category/getcategory").then((res) => {
+      dispatch({ type: "GET_CATEGORIES", payload: res.data.categories })
+    });  
+  }, [])
   const postProduct = () => {
     if (productPicture) {
       const form = new FormData();
@@ -66,7 +72,7 @@ const AddProduct = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="Price"
+            placeholder="Price in ₹"
             onChange={(e) => {
               setPrice(e.target.value);
             }}
@@ -76,7 +82,7 @@ const AddProduct = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="quantity"
+            placeholder="quantity in stock"
             onChange={(e) => {
               setQuantity(e.target.value);
             }}

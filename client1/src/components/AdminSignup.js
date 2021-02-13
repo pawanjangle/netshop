@@ -9,10 +9,11 @@ const AdminSignup = () => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const postData = () => {
-    const data = { firstName, middleName, lastName, email, password };
+    const data = { firstName, middleName, lastName, contactNumber, email, password };
     axios.post("/admin/signup", data).then((res) => {
       if (res.data.message) {
         M.toast({
@@ -60,6 +61,14 @@ const AdminSignup = () => {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
+        <div className="form-group">
+            <input
+              type="Number"
+              className="form-control"
+              placeholder="Enter Mobile No."
+              onChange={(e) => setContactNumber(e.target.value)}
+            />
+          </div>
         <div className="form-group">
           <input
             type="email"
