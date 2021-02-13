@@ -1,4 +1,4 @@
-const env = require("dotenv");
+const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
@@ -11,9 +11,9 @@ const category = require("./routes/category");
 const product = require("./routes/product");
 const cart = require("./routes/cart");
 //envioronment variables
-env.config();
+dotenv.config();
 mongoose
-  .connect("mongodb+srv://pawanjangle:adgjmp100@cluster0.yculf.mongodb.net/Netshop?retryWrites=true&w=majority", {
+  .connect(process.env.mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
