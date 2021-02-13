@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 const AllProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product);
+
   const deleteProduct = (id) => {
     axios
       .delete(`/product/deleteproduct/${id}`, {

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import {useHistory} from "react-router-dom";
 import axios from "axios";
 import M from "materialize-css";
 import {Link} from "react-router-dom"
 import Slide from 'react-reveal/Slide';
 const Signup = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
@@ -23,6 +25,7 @@ const Signup = () => {
     };
     axios.post("/user/signup", data).then((res) => {
       if (res.data.message) {
+        history.push("/signin")
         dispatch({ type: "SIGNUP_USER", payload: res.data });
         M.toast({
           html: res.data.message,
