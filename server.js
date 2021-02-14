@@ -11,7 +11,7 @@ const category = require("./routes/category");
 const product = require("./routes/product");
 const cart = require("./routes/cart");
 //envioronment variables
-dotenv.config()
+dotenv.config();
 mongoose
   .connect(process.env.mongoUri, {
     useNewUrlParser: true,

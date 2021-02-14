@@ -8,9 +8,9 @@
 /coverage
 .eslintcache        
 # production
-/build
-.env.local
-.env
+# /build
+# .env.local
+# .env
 # misc
 .DS_Store
 .env.development.local
