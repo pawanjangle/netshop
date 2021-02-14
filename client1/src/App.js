@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
+const dotenv = require("dotenv");
 import {
   BrowserRouter as Router,
   Route,
@@ -31,6 +32,7 @@ import UserProfile from "./components/UserProfile";
 import UserOrders from "./components/UserOrders";
 import FilteredProducts from "./components/FilteredProducts";
 import ProductDetails from "./components/ProductDetails";
+dotenv.config();
 const SecuredRoute = (props) => { 
   const auth = useSelector((state) => state.auth.authenticated);
   return (
