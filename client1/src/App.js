@@ -90,7 +90,7 @@ const Routing = () => {
           });       
       } else {
         localStorage.clear();      
-        history.push("/signin");
+        history.push("/signin")
       }
     }
   }, []);
