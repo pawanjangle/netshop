@@ -9,7 +9,7 @@
 .eslintcache        
 # production
 /build
-/.env.local
+.env.local
 # misc
 .DS_Store
 .env.development.local
