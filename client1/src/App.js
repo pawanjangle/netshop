@@ -96,7 +96,7 @@ const Routing = () => {
   }, []);
   useEffect(() => {
     axios.get("/product/getproducts").then((res) => {
-      dispatch({ type: "ALL_PRODUCTS", payload: res.data.products });
+      dispatch({ type: "ALL_PRODUCTS", payload: res.data.products })
     });
       axios.get("/category/getcategory").then((res) => {
         dispatch({ type: "GET_CATEGORIES", payload: res.data.categories })
