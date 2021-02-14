@@ -6,6 +6,7 @@ import {
   Switch,
   useHistory,
 } from "react-router-dom";
+import dotenv from "dotenv"
 import jwt from "jsonwebtoken";
 import AddProduct from "./components/AddProduct";
 import AddCategory from "./components/AddCategory";
@@ -31,6 +32,7 @@ import UserProfile from "./components/UserProfile";
 import UserOrders from "./components/UserOrders";
 import FilteredProducts from "./components/FilteredProducts";
 import ProductDetails from "./components/ProductDetails";
+dotenv.config();
 const SecuredRoute = (props) => { 
   const auth = useSelector((state) => state.auth.authenticated);
   return (
