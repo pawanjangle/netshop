@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import M from "materialize-css";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import CategoryList from "./CategoryList";
 const NavbarComponent = () => {
   document.addEventListener("DOMContentLoaded", function () {
@@ -91,8 +90,8 @@ const NavbarComponent = () => {
             <li className="nav-item active sidenav-close">
               <a>
                 <Link className="" to="/cart">
-                  <ShoppingCartOutlinedIcon />
-                  {cartItems ? cartItems.length : "0"}
+              <div className="d-flex justify-content-center align-items-center flex-wrap"> <i className="small material-icons mr-1">add_shopping_cart</i>{cartItems ? cartItems.length : "0"}
+                  </div>
                 </Link>
                 <span className="sr-only">(current)</span>
               </a>

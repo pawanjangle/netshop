@@ -50,7 +50,7 @@ const Cart = () => {
                         style={{ minHeight: "300px" }}
                       >
                         <div className="d-flex flex-wrap">
-                          <div className="col-md-3 d-flex flex-column  align-item-center">
+                          <div className="col-md-3 d-flex justify-content-center align-item-center">
                             <Link to={`/productdetails/${cartItem.product._id}`}>
                              <Flip> <img
                                 className="img-fluid"
@@ -88,7 +88,7 @@ const Cart = () => {
                             </div>
                           </div>
                           <div className="col-md-3 d-flex flex-column align-items-center">
-                            <h6>Price</h6>
+                            <h6>Price:</h6>
                             <p>
                               {cartItem.quantity} X ₹ {cartItem.product.price} =
                               <b>₹ {cartItem.total}</b>
@@ -101,7 +101,7 @@ const Cart = () => {
                 : "There is no Item in cart"}
             </div>   
         </div>
-        <div className="col-md-2 card d-flex flex-column align-items-center">
+        <div className="col-md-2 card d-flex flex-column align-items-center py-3">
           <h6>Subtotal ( {cartItems ? cartItems.length : "0"} items) : </h6>
           <h3> ₹ {cartTotal}</h3>
           {cartItems ? cartItems.length > 0 ? <Checkout /> : null : null}

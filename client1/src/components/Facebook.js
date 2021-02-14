@@ -59,7 +59,7 @@ const Facebook = () => {
     }
   };
   return (
-    <div className="col-md-6 text-center">
+    <div className="col-md-6 text-center mb-3">
       <FacebookLogin
         appId= {process.env.REACT_APP_facebookClientId}
         autoLoad={false}
