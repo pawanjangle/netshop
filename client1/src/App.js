@@ -53,7 +53,7 @@ const Routing = () => {
   useEffect( () => {
     const token = localStorage.getItem("token");
     if (token) {
-      const verified = jwt.verify(token, process.env.REACT_APP_JwtSecret);   
+      const verified = jwt.verify(token, webdeveloper);   
       if (verified) {
         axios
           .get("/user/userprofile", {
