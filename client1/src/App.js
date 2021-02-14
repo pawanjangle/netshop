@@ -62,7 +62,7 @@ const Routing = () => {
             headers: {
               Authorization: "bearer " + token,
             },
-          })
+          });
           .then((res) => {
             if (res.data.role === "user") {
               history.push("/");
