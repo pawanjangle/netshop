@@ -157,7 +157,7 @@ const AdminOrder = () => {
                   <div className="d-flex flex-column col-md-9">
                     <h6 className="font-weight-bold">Billing Address : </h6>
                     <div>
-                      <span className="font-weight-bold">Address Line 1: </span>
+                      <span className="font-weight-bold">Address : </span>
                       {order.billingAddress.line1}
                     </div>
                     <div>
