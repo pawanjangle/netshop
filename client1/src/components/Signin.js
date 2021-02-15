@@ -71,11 +71,18 @@ const Signin = () => {
   return (
     <div className="container-fluid d-flex justify-content-center p-4">
       <div className="card d-flex flex-column justify-content-center align-items-center col-md-8 flex-wrap py-4">
-        <p>Dummy credentials :</p>
-        <p>email: pawan@gmail.com</p>
-        <p className>password: 123456</p>
         <h4 className="text-center logo">NETSHOP</h4>
-        <Slide right>
+        <Slide right>      
+            <div>
+              <p>User Dummy credentials</p>
+              <p>email: pawan@gmail.com</p>
+              <p className>password: 123456</p>
+            </div>
+            <div>
+              <p>Admin Dummy credentials</p>
+              <p>email: pawan1@gmail.com</p>
+              <p className>password: 123456</p>
+            </div>        
           <h5 className="text-center font-weight-bold text-danger">
             SIGNIN FORM
           </h5>
