@@ -70,7 +70,7 @@ const AddProduct = () => {
       <div className="d-flex justify-content-between">
         <div className="form-group">
           <input
-            type="text"
+            type="number"
             className="form-control"
             placeholder="Price in ₹"
             onChange={(e) => {
