@@ -31,7 +31,7 @@ const AllProducts = () => {
           dispatch({ type: "DELETE_PRODUCT_FAILED", payload: res.data });
         }
       });
-  };
+  }
   useEffect(() => {
     axios.get("/product/getproducts",  {
       headers: {
