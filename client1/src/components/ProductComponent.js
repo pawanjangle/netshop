@@ -47,15 +47,15 @@ const ProductComponent = () => {
                     <div className="card mr-3">
                       <Link to={`/productdetails/${product._id}`}>
                         <div
-                          style={{ minHeight: "150px" }}
-                          className="d-flex justify-content-center align-items-center"
+                          style={{ height: "150px"}}
+                          className="text-center" 
                         >
                           <Rotate>
                             <img
                               className="card-img-top img-fluid col-sm-6 col-md-6"
                               src={product.productPicture}
                               alt=""
-                              style={{ height: "100%" }}
+                              style={{ height: "auto" }}
                             />
                           </Rotate>
                         </div>
