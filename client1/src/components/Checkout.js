@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import M from "materialize-css"
 import StripeCheckout from "react-stripe-checkout";
 const Checkout = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const cartTotal = useSelector((state) => state.cart.cartTotal);
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -18,10 +20,10 @@ const Checkout = () => {
           },
         }
       )
-      .then((res) => {
-        console.log(res)
+      .then((res) => {     
         if (res.data.message) {
           dispatch({ type: "CHECKOUT", payload: res.data });
+          history.push("/userorders")
           M.toast({
             html: res.data.message,
             classes: "#00796b teal darken-2",
@@ -40,7 +42,8 @@ const Checkout = () => {
   };
   return (
     <div>
-      <StripeCheckout
+      <h6>dummy card No : 4242424242424242 </h6>     
+      <StripeCheckout     
         name="Netshop"
         token={(paymentInfo) => handleCheckout(paymentInfo)}
         stripeKey={process.env.REACT_APP_stripePKey}
@@ -50,7 +53,7 @@ const Checkout = () => {
           cartItems.length > 0 ? cartItems[0].product.productPicture : "Loading"
         } 
         billingAddress={true}
-        allowRememberMe= {false}
+        allowRememberMe= {false}    
       />
     </div>
   );

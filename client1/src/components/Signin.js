@@ -69,57 +69,65 @@ const Signin = () => {
     });
   };
   return (
-    <div className="container-fluid d-flex justify-content-center p-4">
-      <div className="card d-flex flex-column justify-content-center align-items-center col-md-8 flex-wrap py-4">
+    <div className="container-fluid d-flex justify-content-center flex-wrap">
+      <div className="card col-md-8 d-flex flex-column">
         <h4 className="text-center logo">NETSHOP</h4>
-        <Slide right>      
-            <div>
+        <Slide right>
+          <div className="d-flex justify-content-around">
+            <div className="bg-secondary p-2 text-white">
               <p>User Dummy credentials</p>
               <p>email: pawan@gmail.com</p>
               <p className>password: 123456</p>
             </div>
-            <div>
+            <div className="bg-secondary p-2 text-white">
               <p>Admin Dummy credentials</p>
               <p>email: pawan1@gmail.com</p>
               <p className>password: 123456</p>
-            </div>        
-          <h5 className="text-center font-weight-bold text-danger">
+            </div>
+          </div>
+
+          <h5 className="font-weight-bold text-danger text-center">
             SIGNIN FORM
           </h5>
-          <div className="form-group col-md-8">
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Enter email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="form-group col-md-8">
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Enter Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button
-            type="Signin"
-            className="btn btn-primary"
-            onClick={() => postData()}
-          >
-            Submit
-          </button>
-          <h6 className="mt-4">
-            <Link to="/reset">Forgot Password ?</Link>
-          </h6>
-          <h5>
-            <Link to="/signup">Don't have an Account ?</Link>
-          </h5>
-          <div className="d-flex justify-content-center align-items-center flex-wrap">
-            <Facebook />
-            <Google />
-          </div>
-        </Slide>
+          <div className="d-flex flex-column align-items-center">
+            <div className="form-group col-md-8">
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Enter email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group col-md-8">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <button
+                type="Signin"
+                className="btn btn-primary"
+                onClick={() => postData()}
+              >
+                Submit
+              </button>
+            </div>
+            <h6 className="mt-4">
+              <Link to="/reset">Forgot Password ?</Link>
+            </h6>
+            <h5>
+              <Link to="/signup">Don't have an Account ?</Link>
+            </h5>
+            <div className="d-flex justify-content-center align-items-center flex-wrap">
+              <Facebook />
+              <Google />
+            </div>
+            </div>
+          </Slide>      
       </div>
     </div>
   );
