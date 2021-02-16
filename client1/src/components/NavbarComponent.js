@@ -20,14 +20,14 @@ const NavbarComponent = () => {
     if (token) {
       if (user.role === "admin") {
         return [
-          <>               
-            <li className="nav-item sidenav-close" >
-              <Link to="/userprofile">          
+          <>
+            <li className="nav-item sidenav-close">
+              <Link to="/userprofile">
                 <img
                   className="img-fluid circle"
-                  src={user.profilePic}              
-                  alt=""      
-                  style ={{height: "50px", width: "50px"}}         
+                  src={user.profilePic}
+                  alt=""
+                  style={{ height: "50px", width: "50px" }}
                 />
               </Link>
             </li>
@@ -49,7 +49,7 @@ const NavbarComponent = () => {
                   Category
                 </Link>
               </a>
-            </li>           
+            </li>
             <li className="nav-item sidenav-close">
               <a>
                 <Link className="" to="/admin/receivedorders">
@@ -63,7 +63,7 @@ const NavbarComponent = () => {
                   Logout
                 </Link>
               </a>
-            </li>         
+            </li>
           </>,
         ];
       }
@@ -71,11 +71,11 @@ const NavbarComponent = () => {
         return [
           <>
             <li className="collection-item avatar sidenav-close">
-              <Link to="/userprofile">         
+              <Link to="/userprofile">
                 <img
                   className="img-fluid circle"
-                  src={user.profilePic}  
-                  style ={{height: "50px", width: "50px"}}              
+                  src={user.profilePic}
+                  style={{ height: "50px", width: "50px" }}
                   alt=""
                 />
               </Link>
@@ -90,7 +90,12 @@ const NavbarComponent = () => {
             <li className="nav-item active sidenav-close">
               <a>
                 <Link className="" to="/cart">
-              <div className="d-flex justify-content-center align-items-center flex-wrap"> <i className="small material-icons mr-1">add_shopping_cart</i>{cartItems ? cartItems.length : "0"}
+                  <div className="d-flex justify-content-center align-items-center flex-wrap">
+                    {" "}
+                    <i className="small material-icons mr-1">
+                      add_shopping_cart
+                    </i>
+                    {cartItems ? cartItems.length : "0"}
                   </div>
                 </Link>
                 <span className="sr-only">(current)</span>
@@ -120,22 +125,28 @@ const NavbarComponent = () => {
     }
   };
   return (
-    <div className="navbar-fixed">
-      <nav className="#4a148c purple darken-4 pl-3">
-        <div className="nav-wrapper">
-          <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
-            <a className="brand-logo logo"> NETSHOP</a>
-          </Link>
-          <Link to="#" data-target="mobile-demo slide-out" className="sidenav-trigger">
-            <i className="material-icons">menu</i>
-          </Link>
-          <ul className="right hide-on-med-and-down">{renderList()}</ul>
-        </div>
-      </nav>
-
+    <div>
+      <div className="navbar-fixed">
+        <nav className="#4a148c purple darken-4 pl-3">
+          <div className="nav-wrapper">
+            <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
+              <a className="brand-logo logo"> NETSHOP</a>
+            </Link>
+            <Link
+              to="#"
+              data-target="mobile-demo slide-out"
+              className="sidenav-trigger"
+            >
+              <i className="material-icons">menu</i>
+            </Link>
+            <ul className="right hide-on-med-and-down">{renderList()}</ul>
+          </div>
+        </nav>
+      </div>
       <ul className="sidenav text-center flex-wrap" id="mobile-demo slide-out">
         <div
-          className="navbar-brand logo #4a148c purple darken-4 d-flex justify-content-center align-items-center text-white mb-3"  style={{width: "100%", height: "90px"}}       
+          className="navbar-brand logo #4a148c purple darken-4 d-flex justify-content-center align-items-center text-white mb-3"
+          style={{ width: "100%", height: "90px" }}
         >
           <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
             NETSHOP

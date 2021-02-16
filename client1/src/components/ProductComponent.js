@@ -47,15 +47,15 @@ const ProductComponent = () => {
                     <div className="card mr-3">
                       <Link to={`/productdetails/${product._id}`}>
                         <div
-                          style={{ height: "150px"}}
-                          className="text-center" 
+                          style={{ height: "150px" }}
+                          className="text-center"
                         >
                           <Rotate>
                             <img
                               className="card-img-top img-fluid col-sm-6 col-md-6"
                               src={product.productPicture}
                               alt=""
-                              style={{ height: "auto" }}
+                              style={{ objectFit: "contain", height: "100%" }}
                             />
                           </Rotate>
                         </div>

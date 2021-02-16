@@ -13,7 +13,7 @@ const CategoryNav = () => {
     });
   };
   return (
-    <div className="navbar-fixed">
+    <div className= "navbar-fixed">
       <nav className="hide-on-med-and-down">
         <div class="nav-wrapper #651fff deep-purple accent-3">
           <ul className="">

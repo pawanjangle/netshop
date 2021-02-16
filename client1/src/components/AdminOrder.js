@@ -7,7 +7,6 @@ import Preloader from "./Preloader";
 const AdminOrder = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.order.orders);
-  console.log(orders);
   const [delivery, setDelivery] = useState("");
   const [id, setOrderId] = useState("");
   const orderRef = useRef(null);
