@@ -105,7 +105,7 @@ if(prevCustomer.data.length > 0){
 const order = await new Order({
   user: req.user._id,
   email: paymentInfo.email,
-  total: price * 100,
+  total: price,
   cartItems: cart.cartItems,
   billingAddress : charge.billing_details.address,
   paymentDetails: charge.payment_method_details.card
