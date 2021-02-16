@@ -25,8 +25,7 @@ const Signin = () => {
                 Authorization: "bearer " + localStorage.getItem("token"),
               },
             })
-            .then((res) => {
-              console.log(res.data);
+            .then((res) => {       
               dispatch({ type: "GET_CARTITEMS", payload: res.data });
             });
           dispatch({
