@@ -120,7 +120,7 @@ const NavbarComponent = () => {
     }
   };
   return (
-    <div>
+    <div className="navbar-fixed">
       <nav className="#4a148c purple darken-4 pl-3">
         <div className="nav-wrapper">
           <Link to={user ? (user.role === "user" ? "/" : "/admin") : "/"}>
